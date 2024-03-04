@@ -20,7 +20,7 @@ function Banner() {
 
       {/* Column for the image */}
       <div class="col-md-4 mb-3">
-        <img src="bannerPicture.jpg" class="img-fluid" alt="Your Image" />
+        <img src="banner.jpg" class="img-fluid" alt="Your Image" />
       </div>
     </div>
   </div>

@@ -1,45 +1,77 @@
-body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-  }
-  
+
   .container {
-    max-width: 800px;
-    margin: auto;
+    margin-top: 50px;
     padding: 20px;
+    grid-template-columns: repeat(12, 1fr);
+  grid-template-rows: 3fr;
+  display: grid;
+  gap: 20px;
+
   }
   
+  .prompt{
+    grid-area: 1/1/2/6;
+    color: black;
+    font-size: 36px;
+    font-weight: bold;
+  }
+
+  .prompt > p{
+
+    margin-bottom: 0;
+  }
+
   .search-container {
-    display: flex;
+    display: inline-block;
     gap: 10px;
+    grid-area: 2/1/3/12;
   }
   
   .search-box {
-    width: 70%;
+    width: 95%;
     padding: 10px;
     box-sizing: border-box;
+    height: 65px;
   }
   
   .search-button {
-    width: 30%;
+    width: 5%;
     padding: 10px;
     box-sizing: border-box;
-    background-color: #4CAF50;
+    background-color: #3F72AF;
     color: white;
-    border: none;
+    border: solid 2px #3F72AF;
     cursor: pointer;
+    border-bottom-right-radius: 110px;
+    text-align: left;
+    height: 65px;
+
+
   }
   
   .view-all-button {
-    display: block;
+    grid-area: 3/1/4/3;
     margin-top: 10px;
     padding: 10px;
-    text-align: center;
-    text-decoration: none;
-    background-color: #007BFF;
-    color: white;
-    border: none;
+    text-align: left;
+    background-color: white;
+    color: #3F72AF;
+    border: solid 2px #3F72AF;
     cursor: pointer;
+    border-bottom-right-radius: 110px;
+    text-decoration: none;/* Remove underline from the link */
+  }
+
+  .search-container button:hover {
+    background-color: white;
+  }
+
+  .view-all-button:hover {
+    background-color: #3F72AF;
+    color:white;
+  }
+
+  .search-button:hover svg {
+    fill: #3F72AF;
   }
   

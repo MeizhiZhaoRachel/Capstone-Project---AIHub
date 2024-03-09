@@ -1,13 +1,28 @@
 .custom-header {
   background-color: black;
   padding: 10px 0;
+  width: 100%;
 }
+
+.container {
+  margin-right: 0;
+  width: 100%;
+}
+
+
 
 .header-content {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   grid-template-rows: 1fr;
   gap: 20px;
+}
+
+.logo {
+  color:white;
+  display: flex;
+  justify-content: left; /* Horizontal centering */
+  align-items: center; /* Vertical centering */
 }
 
 .nav-links {
@@ -32,22 +47,24 @@
 .action-buttons {
   grid-area: 1 / 4 / 2 /5;
   gap: 10px;
+  margin-left: 20px;
 }
 
 .signup-button {
-  background-color: black;
-  color: white;
-  border: white solid 1px;
+  background-color: #F8B500;
+  color: black;
+  border: none;
   padding: 10px 15px;
   cursor: pointer;
   border-radius: 5px;
   gap:10px;
+  margin:auto 0 auto 15px;
 }
 
 .login-button {
-  background-color: #F8B500;
-  color: black;
-  border: none;
+  background-color: black;
+  color: white;
+  border: white solid 1px;
   padding: 10px 15px;
   cursor: pointer;
   border-radius: 5px;

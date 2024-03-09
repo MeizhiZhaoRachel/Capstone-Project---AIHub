@@ -7,7 +7,9 @@ function Header() {
     <header className="custom-header">
       <div class="container">
       <div className="header-content">
-        
+        <div className="logo">
+          logo
+          </div>
           <nav className="nav-links">
             <ul>
             <li>Home</li>

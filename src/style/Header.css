@@ -6,6 +6,7 @@
   gap: 20px;
   width: 100%;
   background-image: url("../img/banner.jpg");
+  background-size: cover;/*cover the entire container */
   height: 650px;
   list-style: none;
 }

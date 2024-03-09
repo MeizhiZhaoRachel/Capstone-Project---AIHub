@@ -9,9 +9,11 @@ function Header() {
       <div className="header-content">
         
           <nav className="nav-links">
-            <p>Home</p>
-            <p>Categories</p>
-            <p>About Us</p>
+            <ul>
+            <li>Home</li>
+            <li>Categories</li>
+            <li>About</li>
+            </ul>
           </nav>
 
           <div className="action-buttons">

@@ -6,10 +6,10 @@ function Header() {
   return (
     <header className="custom-header">
       <div class="container">
-      <div className="header-content">
-        <div className="logo">
+      <div className="logo">
           logo
           </div>
+      <div className="header-content">
           <nav className="nav-links">
             <ul>
             <li>Home</li>

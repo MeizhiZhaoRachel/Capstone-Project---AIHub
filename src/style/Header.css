@@ -29,6 +29,7 @@
   grid-area: 1 / 4 / 2 / 9;
   display: flex;
   justify-content: center;
+  
   /* Horizontal centering */
   align-items: top;
   /* Vertical centering */
@@ -46,11 +47,19 @@
 .action-buttons {
   grid-area: 1 / 9 / 2 /13;
   gap: 10px;
-  text-align: right;
+  /*vertically centering */
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  
+  
+
   margin-right: 60px;
 }
 
 .signup-button {
+  display: flex;
+  align-items: center;
   background-color: white;
   color: #112D4E;
   border: none;
@@ -59,15 +68,19 @@
   border-radius: 5px;
   gap: 10px;
   margin: auto 0 auto 15px;
+  height: 40px;
 }
 
 .login-button {
+  display: flex;
+  align-items: center;
   background-color: #112D4E;
   color: white;
   border: white solid 1px;
   padding: 10px 15px;
   cursor: pointer;
   border-radius: 5px;
+  height: 40px;
 }
 
 .action-buttons button:hover {

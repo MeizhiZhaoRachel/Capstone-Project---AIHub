@@ -1,0 +1,48 @@
+.custom-header {
+  background-color: #5E227F;
+  padding: 10px 0;
+}
+
+.header-content {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: 1fr;
+  gap: 20px;
+}
+
+.nav-links {
+  list-style: none;
+  margin: 0;
+  color: white;
+  grid-area: 1 / 2 / 2 / 4;
+}
+
+
+
+.action-buttons {
+  grid-area: 1 / 4 / 2 /5;
+  gap: 10px;
+}
+
+.signup-button {
+  background-color: #5E227F;
+  color: white;
+  border: white solid 1px;
+  padding: 10px 15px;
+  cursor: pointer;
+  border-radius: 5px;
+  gap:10px;
+}
+
+.login-button {
+  background-color: #F8B500;
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.action-buttons button:hover {
+  background-color: #F8B500;
+}

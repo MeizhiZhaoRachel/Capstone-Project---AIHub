@@ -1,30 +1,36 @@
 .custom-header {
-  background-color: #112D4E;
   padding: 10px 0;
   display: grid;
   grid-template-columns: repeat(12, 1fr);
-  grid-template-rows: 1fr;
+  grid-template-rows: repeat(12, 1fr);
   gap: 20px;
   width: 100%;
+  background-image: url("../img/banner.jpg");
+  height: 650px;
+  list-style: none;
 }
 
 .logo {
-  color:white;
+  color: white;
   grid-area: 1 / 1 / 2 / 2;
   display: flex;
-  justify-content: center; /* Horizontal centering */
-  align-items: center; /* Vertical centering */
+  justify-content: center;
+  /* Horizontal centering */
+  align-items: top;
+  /* Vertical centering */
   margin-left: 20PX;
 }
 
 .nav-links {
-  list-style: none;
+
   margin: 12px 0 0 0;
   color: white;
   grid-area: 1 / 4 / 2 / 9;
   display: flex;
-  justify-content: center; /* Horizontal centering */
-  align-items: center; /* Vertical centering */
+  justify-content: center;
+  /* Horizontal centering */
+  align-items: top;
+  /* Vertical centering */
 
 
 }
@@ -50,8 +56,8 @@
   padding: 10px 15px;
   cursor: pointer;
   border-radius: 5px;
-  gap:10px;
-  margin:auto 0 auto 15px;
+  gap: 10px;
+  margin: auto 0 auto 15px;
 }
 
 .login-button {
@@ -65,4 +71,18 @@
 
 .action-buttons button:hover {
   background-color: #3F72AF;
+}
+
+.slogan {
+  color: white;
+  grid-area: 4 / 1 / 7 / 9;
+  font-size: 3em;
+  font-weight: bold;
+margin-left: 45px;
+
+}
+
+.slogan li {
+  list-style-type: none;
+  /* Add this line to remove the list bullets */
 }

@@ -1,15 +1,12 @@
 .custom-header {
   background-color: black;
   padding: 10px 0;
-  width: 100%;
 }
 
 .container {
   margin-right: 0;
   width: 100%;
 }
-
-
 
 .header-content {
   display: grid;

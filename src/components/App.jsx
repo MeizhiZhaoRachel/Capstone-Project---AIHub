@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import Header from "./Header";
-import Banner from "./Banner";
+import SearchBox from "./SearchBox";
 import Categories from "./Categories";
 import Footer from "./Footer";
 
@@ -8,7 +8,7 @@ function App() {
     return (
     <div>
       <Header />
-      <Banner />
+      <SearchBox />
       <Categories />
       <Footer/>
     </div>

@@ -1,0 +1,51 @@
+/* Reviews.css */
+
+.reviews-container {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    grid-template-rows: repeat(12, 1fr);
+    padding: 20px;
+    background-color: #F9F7F7;
+  }
+  
+  .reviews-headerline {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 20px;
+  }
+  
+  .review1,
+  .review2,
+  .review3,
+  .review4,
+  .review5,
+  .review6,
+  .review7,
+  .review8,
+  .review9 {
+    width: 20%;
+    margin-bottom: 20px;
+  }
+  
+  .review-rating {
+    font-size: 24px;
+    margin-bottom: 10px;
+  }
+  
+  .review-reviewer {
+    font-weight: bold;
+    margin-bottom: 10px;
+  }
+  
+  .review-header {
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 10px;
+  }
+  
+  .review-body {
+    margin-bottom: 10px;
+  }
+  
+  /* Add more styles for hr, empty review sections, etc. as needed */
+  

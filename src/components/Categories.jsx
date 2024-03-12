@@ -12,7 +12,7 @@ function Categories() {
         <p class="lead">OPEN AI</p>
       </div>
       <div class="bg-body-tertiary shadow-sm mx-auto" style={{width: "80%", height: "300px", borderRadius: "21px 21px 0 0"}}>
-        <img src="chatgpt.jpg" class="img-fluid" alt="Your Image" />
+        <img src="chatgpt.jpg" class="img-fluid" alt="ChatGPT Picture" />
       </div>
     </div>
     <div class="bg-body-tertiary me-md-3 pt-3 px-3 pt-md-5 px-md-5 text-center overflow-hidden">

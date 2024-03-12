@@ -23,18 +23,14 @@
 }
 
 .nav-links {
-
   margin: 12px 0 0 0;
   color: white;
   grid-area: 1 / 4 / 2 / 9;
   display: flex;
   justify-content: center;
-  
   /* Horizontal centering */
   align-items: top;
   /* Vertical centering */
-
-
 }
 
 .nav-links li {

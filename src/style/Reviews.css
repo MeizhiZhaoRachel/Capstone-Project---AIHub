@@ -5,7 +5,7 @@
   grid-template-rows: repeat(12, 1fr);
   padding: 70px; /* 80px padding on all sides for the whole reviews container*/
   background-color: #f9f7f7;
-  height: 800px;
+  height: 700px;
   overflow-y: scroll;
   padding-top: 50px;
 }

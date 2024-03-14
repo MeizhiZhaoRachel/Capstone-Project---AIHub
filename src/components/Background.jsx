@@ -4,6 +4,11 @@ import "../style/Background.css";
 function Background() {
   return (
     <div className="background-img">
+        <br></br>
+        <br></br>
+        <br></br>
+        <br></br>
+        <br></br>
         <div className="slogan">
         <ul>
           <li>Unlocking AI</li>

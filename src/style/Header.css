@@ -1,13 +1,15 @@
 .custom-header {
+  position: sticky;
+  top: 0;
   padding: 10px 0;
   display: grid;
   grid-template-columns: repeat(12, 1fr);
   grid-template-rows: repeat(12, 1fr);
   gap: 20px;
   width: 100%;
-  background-image: url("../img/banner.jpg");
-  background-size: cover;/*cover the entire container */
-  height: 650px;
+  background-color:#0E223A;
+  /*background-size: cover*/
+  height: 75px;
   list-style: none;
 }
 
@@ -25,17 +27,18 @@
 .nav-links {
   margin: 12px 0 0 0;
   color: white;
-  grid-area: 1 / 4 / 2 / 9;
+  grid-area: 1 / 9 / 2 / 10;
   display: flex;
   justify-content: center;
   /* Horizontal centering */
   align-items: top;
   /* Vertical centering */
+
 }
 
 .nav-links li {
   display: inline;
-  margin: 0 10px;
+  margin: 0 20px;
 }
 
 
@@ -47,6 +50,7 @@
   display: flex;
   align-items: center;
   justify-content: flex-end;
+  margin-left: 0;
   
   
 

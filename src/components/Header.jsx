@@ -19,7 +19,6 @@ function Header() {
       </div>
       <nav className="nav-links">
         <ul>
-          <li>Home</li>
           <li>Categories</li>
           <li>About</li>
         </ul>
@@ -34,13 +33,8 @@ function Header() {
         </button>
       </div>
 
-      <nav className="slogan">
-        <ul>
-          <li>Unlocking AI</li>
-          <li> Excellence</li>
-          <li>Review Rate Trust</li>
-        </ul>
-      </nav>
+      
+    
     </header>
   );
 }

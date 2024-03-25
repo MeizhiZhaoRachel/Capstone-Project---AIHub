@@ -59,7 +59,7 @@
     grid-area: 11 / 6 / 12 / 9;
     display: flex;
     justify-content: center;
-    flex-direction: co;
+    flex-direction: column;
 }
 
 .custom-footer li {

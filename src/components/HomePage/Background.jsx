@@ -1,5 +1,6 @@
+// Background.jsx
 import React from "react";
-import "../style/Background.css";
+import '../../style/HomePage/Background.css';
 
 function Background() {
   return (

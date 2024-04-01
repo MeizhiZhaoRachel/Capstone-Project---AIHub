@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { useUserContext } from "./Sign/UserContext";
-import "../style/Header.css";
+import { useUserContext } from "../Sign/UserContext";
+import "../../style/HomePage/Header.css";
 
 function Header() {
   // Accessing the user state from the UserContext

@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import Web3 from 'web3';
-import reviewContractABI from './reviewContractABI.json';
+import reviewContractABI from '../ProductList/reviewContractABI.json';
 import { useProducts } from './ProductsContext'; // Import useProducts hook
-import './ProductDetailPage.css';
+import '../../style/ProductDetail/ProductDetail.css';
 
 const web3 = new Web3(Web3.givenProvider);
 const reviewContractAddress = '0xbe142227e16007a5eb3f9bc31a9109e5023e2a4e';

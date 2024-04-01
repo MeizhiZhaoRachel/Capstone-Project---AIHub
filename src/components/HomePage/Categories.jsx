@@ -1,8 +1,9 @@
+// Categories.jsx
 import React from "react";
 // Import Link from react-router-dom
 import { Link } from "react-router-dom";
-import "../style/Categories.css";
-import { useProducts } from "./ProductDetail/ProductContext"
+import "../../style/HomePage/Categories.css";
+import { useProducts } from "../ProductDetail/ProductsContext"
 
 function Categories() {
   

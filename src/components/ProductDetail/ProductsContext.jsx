@@ -9,20 +9,20 @@ const products = [
     {
       id: 1,
       name: "ChatGPT",
-      imageUrl: "../public/img/chatgpt.jpg",
-      description: "ChatGPT Image Description", // Changed 'alt' to 'description' for consistency
+      imageUrl: "../../../public/img/chatgpt.jpg",
+      description: "ChatGPT Image", 
     },
     {
       id: 2,
       name: "Gemini",
       imageUrl: "../public/img/gemini.jpg",
-      description: "Gemini Image Description",
+      description: "Gemini Image",
     },
     {
       id: 3,
       name: "WenXinYiYan",
       imageUrl: "../public/img/wenxinyiyan.jpg",
-      description: "WenXinYiYan Image Description",
+      description: "WenXinYiYan Image",
     },
   ];
 

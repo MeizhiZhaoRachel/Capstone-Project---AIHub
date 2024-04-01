@@ -1,10 +1,11 @@
-import React from "react";
-import "../style/SearchBox.css";
-import { Link } from "react-router-dom";
+import React, { useState} from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { useHistory } from "react-router-dom"
+import "../../style/HomePage/SearchBox.css";
 
 function SearchBox() {
   const [searchTerm, setSearchTerm] = useState("");
-  const history = useHistory();
+  const navigate = useNavigate();
 
   const handleSearch = (e) => {
     // Prevent the form from refreshing the page
@@ -12,7 +13,7 @@ function SearchBox() {
     e.preventDefault();
     // Navigate to the product list with a query parameter
     //encodeURIComponent is a JavaScript function that encodes special characters in the searchTerm variable
-    history.push(`/productlist?search=${encodeURIComponent(searchTerm)}`);
+    navigate.push(`/productlist?search=${encodeURIComponent(searchTerm)}`);
   };
 
   return (
@@ -21,8 +22,15 @@ function SearchBox() {
         <p>Find a product</p>
       </div>
       <div className="search-container">
-        <input type="text" className="search-box" placeholder="Search..." value={searchTerm} onChange={(e) => setSearchTerm(e.target.value)}/>
-        <button className="search-button" onClick={handleSearch} >
+        <input
+          type="text"
+          className="search-box"
+          placeholder="Search..."
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)}
+        />
+        {/*The button with the onClick handler to trigger the search*/}
+        <button className="search-button" onClick={handleSearch}>
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="16"

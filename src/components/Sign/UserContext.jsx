@@ -6,10 +6,10 @@ const UserContext = createContext();
 
 //A custom hook that simplifies the usage of our UserContext
 //useContext allows functional components to access context values
-const useUserContext = () => useContext(UserContext);
+export const useUserContext = () => useContext(UserContext);
 
 //Anyone in my part of the app can share and access the user information
-const UserProvider = ({ children }) => {
+export const UserProvider = ({ children }) => {
   const [user, setUser] = useState(null); 
 
   return (
@@ -20,4 +20,3 @@ const UserProvider = ({ children }) => {
   );
 };
 
-export default UserContext;

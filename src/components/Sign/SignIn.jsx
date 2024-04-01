@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
-import { useAuth } from './AuthContext'; // Adjust the import path as necessary
-import { useHistory } from 'react-router-dom'; // If you're using react-router for navigation
+import { useAuth } from './AuthContext'; 
+import { useNavigate } from 'react-router-dom'; 
 
 function SignIn() {
   const [formData, setFormData] = useState({ email: '', password: '' });
   const { signIn } = useAuth();
-  const history = useHistory(); // For redirecting after sign-in
+  const navigate = useNavigate(); // For redirecting after sign-in
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -15,10 +15,10 @@ function SignIn() {
     e.preventDefault();
     try {
       await signIn(formData);
-      history.push('/dashboard'); // Redirect to dashboard or another route
+      navigate.push('/'); // Redirect to dashboard or another route
     } catch (error) {
       console.error('SignIn Error:', error);
-      // Optionally, handle or display the error to the user
+      // Handle error state as needed
     }
   };
 

@@ -2,10 +2,10 @@
 import React, { useState, useEffect } from "react";
 import Web3 from "web3";
 import reviewContractABI from "./reviewContractABI.json";
-import { useProducts } from "./ProductsContext";
+import { useProducts } from "../ProductDetail/ProductsContext";
 import { useAuth } from "../Sign/AuthContext";
 import { Link } from 'react-router-dom';
-import "./WriteReview.css";
+import "../../style/ProductList/WriteReview.css";
 
 /* Initialize a Web3 instance, connecting to the Ethereum network 
 via a provider injected by the user's Ethereum browser extension (e.g., MetaMask).*/

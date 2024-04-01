@@ -1,5 +1,5 @@
 import React from 'react';
-import { Route, Redirect } from 'react-router-dom';
+import { Route, Navigate } from 'react-router-dom';
 import { useAuth } from './AuthContext'; // Adjust the import path as necessary
 
 function ProtectedRoute({ component: Component, ...rest }) {
@@ -12,9 +12,11 @@ function ProtectedRoute({ component: Component, ...rest }) {
         currentUser ? (
           <Component {...props} />
         ) : (
-          <Redirect to="/signin" />
+          <Navigate to="/signin" />
         )
       }
     />
   );
 }
+
+export default ProtectedRoute;

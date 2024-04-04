@@ -13,7 +13,7 @@ function SearchBox() {
     e.preventDefault();
     // Navigate to the product list with a query parameter
     //encodeURIComponent is a JavaScript function that encodes special characters in the searchTerm variable
-    navigate.push(`/productlist?search=${encodeURIComponent(searchTerm)}`);
+    navigate(`/productlist?search=${encodeURIComponent(searchTerm)}`);
   };
 
   return (

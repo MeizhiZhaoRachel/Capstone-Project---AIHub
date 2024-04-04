@@ -16,7 +16,7 @@ export const AuthProvider = ({ children }) => {
 
   const signIn = async (formData) => {
     try {
-      const response = await fetch('http://yourbackend.com/api/signin', {
+      const response = await fetch('https://aihub.au/api/signin', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(formData),
@@ -33,7 +33,7 @@ export const AuthProvider = ({ children }) => {
 
   const signUp = async (formData) => {
     try {
-      const response = await fetch('http://yourbackend.com/api/signup', {
+      const response = await fetch('https://aihub.au/api/signup', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(formData),

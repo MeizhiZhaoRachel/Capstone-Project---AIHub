@@ -1,22 +1,13 @@
+// ProtectedRoute.js
 import React from 'react';
-import { Route, Navigate } from 'react-router-dom';
-import { useAuth } from './AuthContext'; // Adjust the import path as necessary
+import { Navigate } from 'react-router-dom';
+import { useAuth } from './AuthContext'; // Make sure the import path is correct
 
-function ProtectedRoute({ component: Component, ...rest }) {
-  const { currentUser } = useAuth(); // Use currentUser from AuthContext
+const ProtectedRoute = ({ element }) => {
+  const { currentUser } = useAuth();
 
-  return (
-    <Route
-      {...rest}
-      render={props =>
-        currentUser ? (
-          <Component {...props} />
-        ) : (
-          <Navigate to="/signin" />
-        )
-      }
-    />
-  );
-}
+  // If there's no current user, redirect to the sign-in page
+  return currentUser ? element : <Navigate to="/signin" />;
+};
 
 export default ProtectedRoute;

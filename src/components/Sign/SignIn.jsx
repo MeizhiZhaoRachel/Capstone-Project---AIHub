@@ -15,7 +15,7 @@ function SignIn() {
     e.preventDefault();
     try {
       await signIn(formData);
-      navigate.push('/'); // Redirect to dashboard or another route
+      navigate('/'); // Redirect to dashboard or another route
     } catch (error) {
       console.error('SignIn Error:', error);
       // Handle error state as needed

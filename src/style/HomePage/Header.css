@@ -39,7 +39,7 @@
   display: flex;
   justify-content: flex-end; /* Align action buttons to the right */
   gap: 10px;
-  margin-right: 20px;
+  margin-right: 40px;
 }
 
 .signup-button, .login-button {

@@ -4,18 +4,18 @@ import Web3 from "web3";
 import reviewContractABI from "./reviewContractABI.json";
 import { useProducts } from "../ProductDetail/ProductsContext";
 import { useAuth } from "../Sign/AuthContext";
-import { Link } from 'react-router-dom';
+import { Link } from "react-router-dom";
 import "../../style/ProductList/WriteReview.css";
 
-/* Initialize a Web3 instance, connecting to the Ethereum network 
-via a provider injected by the user's Ethereum browser extension (e.g., MetaMask).*/
+// Initialize a Web3 instance,
+// connecting to the Ethereum network
+// via a provider injected by the user's Ethereum browser extension (e.g., MetaMask).
 const web3 = new Web3(Web3.givenProvider);
 const reviewContractAddress = "0xbe142227e16007a5eb3f9bc31a9109e5023e2a4e";
 // Create a contract instance in your application, allowing you to interact with the smart contract.
 // The first argument is the ABI (Application Binary Interface) of your contract, which is a JSON representation
 // defining how to interact with the contract (functions, variables, etc.).
 // The second argument is the address where the contract is deployed.
-// You need to replace `reviewContractABI` with the actual ABI JSON of your contract.
 const reviewContract = new web3.eth.Contract(
   reviewContractABI,
   reviewContractAddress
@@ -33,6 +33,7 @@ function WriteReview() {
 
   const [review, setReview] = useState({
     productId: "",
+    name: "",
     content: "",
     rating: 0,
   });
@@ -48,13 +49,15 @@ function WriteReview() {
       </div>
     );
   }
+
   // e represents the event that triggered the call to handleInputChange.
   const handleInputChange = (e) => {
-    // This line destructures the e.target object, extracting the name and value properties.
+    // e.target essentially gives you access to the element that triggered the event.
     const { name, value } = e.target;
-    /* The new state is formed by spreading the previous state into a new object  (...prevState)
-    updating the relevant property with the input's new value ([name]: value).*/
-    // name variable will be used as the key
+    // ...prevState: (...) is used to copy all the properties from the current state object into a new object.
+    // the event object is used to extract the name of the textarea and the value entered by the user.
+    // For example, in textarea with name="content", name will be "content" and value will be the text entered by the user.
+    // and value is the new value for that property.
     setReview((prevState) => ({ ...prevState, [name]: value }));
   };
 
@@ -63,9 +66,13 @@ function WriteReview() {
     try {
       // prompt the user for permission to access their Ethereum accounts
       const accounts = await web3.eth.requestAccounts();
-      const timestamp = Date.now(); // Current timestamp in milliseconds
-      const userIdOrEmail = currentUser.email; // Assuming you have access to currentUser object
+      // Date.now() returns the number of milliseconds elapsed since January 1, 1970 00:00:00 UTC.
+      const timestamp = Date.now();
+      // Assuming you have access to currentUser object with an email property
+      const userIdOrEmail = currentUser.email;
+      //
       await reviewContract.methods
+        // Function comes from the smart contract ABI
         .writeReview(
           review.productId,
           review.content,
@@ -83,6 +90,7 @@ function WriteReview() {
   };
 
   const handleFormSubmit = (e) => {
+    // Prevent form from causing a page reload
     e.preventDefault();
     if (!isMetaMaskInstalled) {
       // If MetaMask is not installed, provide a message or modal to instruct on installation
@@ -106,29 +114,51 @@ function WriteReview() {
       {showReviewForm && isMetaMaskInstalled && (
         <div className="review-form-container">
           <h2>Write a review</h2>
+          {/* }If there's no handleInputChange function implemented or a similar mechanism 
+          to update the component's state based on user input, then 
+          the component would not automatically gather or update its state with the values 
+          from the form inputs (review.productId, review.content, review.rating, etc.). */}
           <form onSubmit={handleFormSubmit}>
             <select
-              // set productId as the name of the select element
+              // setReview((prevState) => ({ ...prevState, [name]: value }));
+              // name = "productId" and value = {review.productId}
               name="productId"
               onChange={handleInputChange}
+              // The value={review.productId} on the <select> element ensures that
+              // the dropdown's selected value corresponds to the productId in your component's review state.
+              // When a user selects a product from the dropdown, review.productId is updated to match the value of the selected <option>, which is product.id.
               value={review.productId}
             >
               {products.map((product) => (
+                // When a user selects a product from the dropdown,
+                // review.productId is updated to match the value of the selected <option>,
+                // which is product.id.
+                // The key provides a unique identifier for each element in the list
+                // Technically, you can render a list without providing a key prop
+                // Without keys, React has no way of knowing which elements have changed.
                 <option key={product.id} value={product.id}>
                   {product.name}
                 </option>
               ))}
             </select>
             <div className="star-rating">
+              {/* The underscore used when you don't need the value provided by the map */}
+              {/* index: Represents the current position in the array, 
+              starting from 0 up to 4 (since there are 5 stars). */}
               {[...Array(5)].map((_, index) => (
+                // This line generates an individual star button for each iteration.
                 <button
                   key={index}
                   type="button"
+                  // Backticks (`): when you want to include dynamic expressions inside a string
+                  // This is where an expression is evaluated to dynamically set the class names.
                   className={`star-button ${
                     review.rating > index ? "selected" : ""
                   }`}
                   onClick={() =>
                     setReview((prevState) => ({
+                      // prevState is used to ensure that we only update the rating property
+                      // while keeping the rest of the review state unchanged.
                       ...prevState,
                       rating: index + 1,
                     }))
@@ -139,9 +169,13 @@ function WriteReview() {
               ))}
             </div>
             <textarea
+              // setReview((prevState) => ({ ...prevState, [name]: value }));
+              // name = "content" and value = {review.content}
               name="content"
+              // This text is displayed in the <textarea> before the user enters a value
               placeholder="The feeling of experience"
               onChange={handleInputChange}
+              // bind the input to the review.content state property
               value={review.content}
             ></textarea>
             <button type="submit" className="submit-review-button">

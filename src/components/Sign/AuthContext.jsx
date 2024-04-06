@@ -1,12 +1,17 @@
 import React, { createContext, useContext, useState } from 'react';
 
+// Create a Context object for authentication data
 const AuthContext = createContext();
 
+// Define a provider component to encapsulate the authentication logic and state
 export const AuthProvider = ({ children }) => {
   const [currentUser, setCurrentUser] = useState(null);
   const [authToken, setAuthToken] = useState(null); // Store the JWT token
 
   // Function to update state with user and token
+  // A token, in the context of web authentication, 
+  // is a cryptographically signed piece of data 
+  // issued by a server to authenticate and authorize a user or application accessing a secured resource
   const authenticateUser = (user, token) => {
     setCurrentUser(user);
     setAuthToken(token);

@@ -19,6 +19,7 @@ export const AuthProvider = ({ children }) => {
     localStorage.setItem('authToken', token);
   };
 
+  // It sends the user's sign-in credentials to the server and updates the app state with the response
   const signIn = async (formData) => {
     try {
       const response = await fetch('https://aihub.au/api/signin', {
@@ -27,8 +28,10 @@ export const AuthProvider = ({ children }) => {
         body: JSON.stringify(formData),
       });
       if (!response.ok) throw new Error('Sign in failed');
+      // within the response JSON object received from the server, 
+      // there's a property named token, and this property is being extracted into a standalone variable also named token
       const { token } = await response.json();
-      // Simulate getting user data, in a real app, you might return this data from your API
+      // ??
       authenticateUser({ email: formData.email }, token);
     } catch (error) {
       console.error('SignIn Error:', error);
@@ -45,8 +48,8 @@ export const AuthProvider = ({ children }) => {
       });
       if (!response.ok) throw new Error('Sign up failed');
       const user = await response.json();
-
-      authenticateUser(user, null); // Adjust based on your API response
+      // adjust according to API response
+      authenticateUser(user, null); 
     } catch (error) {
       console.error('SignUp Error:', error);
     }

@@ -17,6 +17,9 @@ function SignUp() {
   const navigate = useNavigate();
 
   const handleChange = (e) => {
+    // "..." creates a new object with the same key-value pairs as formData
+    // This part dynamically updates the key in the new object that corresponds to the changed input field with its new value. 
+    // For example, if the email field is updated, this effectively becomes { email: 'new email value' }.
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
@@ -37,6 +40,9 @@ function SignUp() {
         {/* Personal information inputs */}
         <div>
           <label htmlFor="firstName">First Name:</label>
+           {/* [e.target.name]: e.target.value 
+          [e.target.name] here could be frist name and e.target.value could be formData.firstname
+          */}
           <input
             type="text"
             id="firstName"
@@ -48,6 +54,9 @@ function SignUp() {
         </div>
         <div>
           <label htmlFor="lastName">Last Name:</label>
+          {/* [e.target.name]: e.target.value 
+          [e.target.name] here could be last name and e.target.value could be formData.lastname
+          */}
           <input
             type="text"
             id="lastName"
@@ -59,6 +68,9 @@ function SignUp() {
         </div>
         <div>
           <label htmlFor="email">Email:</label>
+          {/* [e.target.name]: e.target.value 
+          [e.target.name] here could be email and e.target.value could be formData.email
+          */}
           <input
             type="email"
             id="email"
@@ -70,6 +82,9 @@ function SignUp() {
         </div>
         <div>
           <label htmlFor="password">Password:</label>
+          {/* [e.target.name]: e.target.value 
+          [e.target.name] here could be password and e.target.value could be formData.password
+          */}
           <input
             type="password"
             id="password"
@@ -83,6 +98,9 @@ function SignUp() {
         {/* Gender input */}
         <div>
           <label htmlFor="gender">Gender:</label>
+          {/* [e.target.name]: e.target.value 
+          [e.target.name] here could gender and e.target.value could be formData.gender
+          */}
           <select
             name="gender"
             value={formData.gender}
@@ -97,9 +115,12 @@ function SignUp() {
           </select>
         </div>
 
-        {/* Vocation input with more than 20 options */}
+        {/* Vocation input */}
         <div>
           <label htmlFor="vocation">Vocation:</label>
+           {/* [e.target.name]: e.target.value 
+          [e.target.name] here could vocation and e.target.value could be formData.vocation
+          */}
           <select
             name="vocation"
             value={formData.vocation}

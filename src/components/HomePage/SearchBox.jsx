@@ -1,6 +1,5 @@
 import React, { useState} from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { useHistory } from "react-router-dom"
 import "../../style/HomePage/SearchBox.css";
 
 function SearchBox() {

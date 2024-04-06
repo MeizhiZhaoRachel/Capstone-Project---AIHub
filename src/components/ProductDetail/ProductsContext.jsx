@@ -1,5 +1,5 @@
 // ProductsContext.js
-import React, { createContext, useState, useContext } from "react";
+import React, { createContext, useContext } from "react";
 import chatgptImage from "../../img/chatgpt.jpg";
 import GeminiImage from "../../img/gemini.jpg";
 import WenXinYiYanImage from "../../img/wenxinyiyan.jpg";

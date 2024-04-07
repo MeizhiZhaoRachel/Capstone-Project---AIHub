@@ -13,7 +13,7 @@ function Background() {
         <div className="slogan">
         <ul>
           <li>Unlocking AI</li>
-          <li> Excellence</li>
+          <li>Excellence</li>
           <li>Review Rate Trust</li>
         </ul>
         </div>

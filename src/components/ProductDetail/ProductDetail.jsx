@@ -15,7 +15,7 @@ const reviewContract = new web3.eth.Contract(
   reviewContractAddress
 );
 
-function ProductDetailPage() {
+function ProductDetail() {
   // State hooks for storing product details and reviews.
   const [productDetails, setProductDetails] = useState(null);
   const [reviews, setReviews] = useState([]);
@@ -95,4 +95,4 @@ function ProductDetailPage() {
   );
 }
 
-export default ProductDetailPage;
+export default ProductDetail;

@@ -4,7 +4,6 @@ import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import { AuthProvider } from "./Sign/AuthContext";
 import ProtectedRoute from "./Sign/ProtectedRoute";
 import { ProductProvider } from "./ProductDetail/ProductsContext";
-import { UserProvider } from "./Sign/UserContext";
 
 import AboutUs from "./AboutUs/AboutUs.jsx";
 import Header from "./HomePage/Header";
@@ -21,7 +20,7 @@ import ContactUs from "./ContactUs/ContactUs.jsx";
 
 function App() {
   return (
-    <UserProvider>
+
       <AuthProvider>
         <ProductProvider>
           <Router>
@@ -51,7 +50,6 @@ function App() {
           </Router>
         </ProductProvider>
       </AuthProvider>
-    </UserProvider>
   );
 }
 

@@ -1,11 +1,12 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { useUserContext } from "../Sign/UserContext";
 import "../../style/HomePage/Header.css";
+import { useAuth } from "../Sign/AuthContext";
 
 function Header() {
   // Accessing the user state from the UserContext
-  const { user } = useUserContext();
+  const { currentUser } = useAuth();
+
 
   return (
     <header className="custom-header">
@@ -38,9 +39,9 @@ function Header() {
       </nav>
 
       <div className="action-buttons">
-        {user ? (
+        {currentUser ? (
           // If user is signed in, display nickname
-          <div className="user-nickname">{user.nickname}</div>
+          <div className="user-nickname">{currentUser.nickname}</div>
         ) : (
           // If not signed in, show Login/Sign-up buttons
           <>

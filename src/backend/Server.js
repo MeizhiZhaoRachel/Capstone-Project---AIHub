@@ -4,6 +4,7 @@ import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 import pg from 'pg';
 import cors from 'cors';
+import { pool, createUserTable } from './database.js';
 
 const app = express();
 // Define the port number for the server to listen on
@@ -18,7 +19,7 @@ const PORT = 3000;
 //   port: 5432,
 // });
 
-import { pool, createUserTable } from './database.js';
+
 
 async function createSignUp(){
   try {
@@ -36,15 +37,17 @@ createSignUp();
 //   credentials: true,
 // }));
 var corsOptions = {
-  origin: 'http://localhost:3001',  // Allow only requests from this origin
-  optionsSuccessStatus: 200 // For legacy browser support (IE11, various SmartTVs)
+  origin: 'http://localhost:3000',  // This should match the origin of your frontend application
+  credentials: true,  // If your frontend needs to send cookies or authorization headers
+  methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+  allowedHeaders: 'Content-Type,Authorization'
 };
 
-app.use(cors());
+app.use(cors(corsOptions));
 app.use(express.json());
 
 // Sign Up Route
-app.post('/api/signup', async (req, res) => {
+app.post('/api/signup', cors(corsOptions),async (req, res) => {
   const origin= req.headers.origin
   res.header("Access-Control-Allow-Origin", origin); 
   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
@@ -81,7 +84,7 @@ app.post('/api/signup', async (req, res) => {
 });
 
 // Sign In Route
-app.post('/api/signin', async (req, res) => {
+app.post('/api/signin', cors(corsOptions),async (req, res) => {
   const { email, password } = req.body;
 
   try {

@@ -4,8 +4,8 @@ const { Pool } = pg;
 const pool = new Pool({
     user: 'postgres',
     password: '123456',
-    database: 'AIHub',
-    host: '35.244.76.220',
+    database: 'postgres',
+    host: 'localhost',
     port: 5432,
   });
 

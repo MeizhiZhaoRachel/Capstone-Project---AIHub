@@ -18,7 +18,7 @@ function SignUp() {
 
   const handleChange = (e) => {
     // "..." creates a new object with the same key-value pairs as formData
-    // This part dynamically updates the key in the new object that corresponds to the changed input field with its new value. 
+    // This part dynamically updates the key in the new object that corresponds to the changed input field with its new value.
     // For example, if the email field is updated, this effectively becomes { email: 'new email value' }.
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
@@ -40,7 +40,7 @@ function SignUp() {
         {/* Personal information inputs */}
         <div>
           <label htmlFor="firstName">First Name:</label>
-           {/* [e.target.name]: e.target.value 
+          {/* [e.target.name]: e.target.value 
           [e.target.name] here could be frist name and e.target.value could be formData.firstname
           */}
           <input
@@ -102,6 +102,7 @@ function SignUp() {
           [e.target.name] here could gender and e.target.value could be formData.gender
           */}
           <select
+            id="gender"
             name="gender"
             value={formData.gender}
             onChange={handleChange}
@@ -118,10 +119,11 @@ function SignUp() {
         {/* Vocation input */}
         <div>
           <label htmlFor="vocation">Vocation:</label>
-           {/* [e.target.name]: e.target.value 
+          {/* [e.target.name]: e.target.value 
           [e.target.name] here could vocation and e.target.value could be formData.vocation
           */}
           <select
+            id="vocation"
             name="vocation"
             value={formData.vocation}
             onChange={handleChange}
@@ -156,6 +158,7 @@ function SignUp() {
           <div>
             <label htmlFor="otherVocation">If Other, please specify:</label>
             <input
+              id="otherVocation"
               type="text"
               name="otherVocation"
               value={formData.otherVocation}

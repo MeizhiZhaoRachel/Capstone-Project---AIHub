@@ -80,3 +80,5 @@ export const AuthProvider = ({ children }) => {
 
 // The data comes from AuthContext.Provider value={{ currentUser, signIn, signUp, signOut, authToken }}
 export const useAuth = () => useContext(AuthContext);
+
+

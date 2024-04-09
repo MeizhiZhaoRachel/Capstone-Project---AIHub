@@ -20,7 +20,7 @@ function SignIn() {
     e.preventDefault();
     try {
       await signIn(formData);
-      navigate('/'); // Redirect to dashboard or another route
+      navigate(-1); // Redirect to dashboard or another route
     } catch (error) {
       console.error('SignIn Error:', error);
       // Handle error state as needed

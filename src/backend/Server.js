@@ -4,7 +4,7 @@ import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 import pg from 'pg';
 import cors from 'cors';
-import { pool, createUserTable } from './database.js';
+import { pool, createUserTable, setupProductsTable } from './database.js';
 
 const app = express();
 // Define the port number for the server to listen on
@@ -19,15 +19,26 @@ const PORT = 3000;
 //   port: 5432,
 // });
 
+async function createProducts() {
+  try {
+    await setupProductsTable();
+    console.log('Table products created successfully');
+  }
+  catch (error) {
+    console.log("Error creating table:", error);
+  }
+}
 
+createProducts();
 
-async function createSignUp(){
+async function createSignUp() {
   try {
     await createUserTable();
     console.log('Table users created successfully');
-}
-catch (error) {console.log("Error creating table:", error);
-}
+  }
+  catch (error) {
+    console.log("Error creating table:", error);
+  }
 }
 
 createSignUp();
@@ -46,11 +57,26 @@ var corsOptions = {
 app.use(cors(corsOptions));
 app.use(express.json());
 
-// Sign Up Route
-app.post('/api/signup',async (req, res) => {
+
+// Get all products route
+app.get('/api/products', async (req, res) => {
   const origin = req.headers.origin;
-  
-  res.header("Access-Control-Allow-Origin", origin); 
+  res.header("Access-Control-Allow-Origin", origin);
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  try {
+    const result = await pool.query('SELECT * FROM products');
+    res.json(result.rows);
+  } catch (error) {
+    console.error('Error getting products:', error);
+    res.status(500).json({ error: 'Error getting products' });
+  }
+})
+
+// Sign Up Route
+app.post('/api/signup', async (req, res) => {
+  const origin = req.headers.origin;
+
+  res.header("Access-Control-Allow-Origin", origin);
   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
   /* req.body should contain the following fields:
   "firstName": "John",
@@ -63,9 +89,21 @@ app.post('/api/signup',async (req, res) => {
   const hashedPassword = await bcrypt.hash(password, 10);
   // Determine the effective vocation: if vocation is 'other', use otherVocation value
   const effectiveVocation = vocation === 'other' ? otherVocation : vocation;
-
+  try {
+    // Check if the user already exists in the database
+    const result = await pool.query(`SELECT * FROM users WHERE email=$1`, [email])
+    if (result.rows.length > 0) {
+      // If the user already exists, send a 409 Conflict status
+      return res.status(409).json({ error: 'User already exists' });
+    }
+  } catch (error) {
+    console.error('SignUp Error:', error);
+    return res.status(500).json({ error: 'Error checking for existing user' });
+  }
   // Insert the new user into the database
   try {
+
+
     const result = await pool.query(
       'INSERT INTO users (first_name, last_name, email, password, gender, vocation) VALUES ($1, $2, $3, $4, $5, $6) RETURNING *',
       [firstName, lastName, email, hashedPassword, gender, effectiveVocation]
@@ -87,7 +125,7 @@ app.post('/api/signup',async (req, res) => {
 // Sign In Route
 app.post('/api/signin', async (req, res) => {
   const origin = req.headers.origin;
-  res.header("Access-Control-Allow-Origin", origin); 
+  res.header("Access-Control-Allow-Origin", origin);
   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
   const { email, password } = req.body;
   console.log(email, password)

@@ -27,7 +27,7 @@ function SignUp() {
     e.preventDefault();
     try {
       await signUp(formData);
-      navigate("/signin");
+      navigate(-1);
     } catch (error) {
       console.error("SignUp Error:", error);
     }

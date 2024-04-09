@@ -9,6 +9,57 @@ const pool = new Pool({
     port: 5432,
   });
 
+// const pool = new Pool({
+//     user: 'postgres',
+//    password: '123456',
+//     database: 'AIHub',
+//     host: '35.244.76.220',
+//     port: 5432,
+//  });
+
+ async function setupProductsTable() {
+    const client = await pool.connect();
+    try {
+        // Check if the products table exists
+        const tableExists = await client.query(`
+            SELECT EXISTS (
+                SELECT 1 FROM pg_tables
+                WHERE schemaname = 'public' AND tablename  = 'products'
+            );
+        `);
+
+        if (!tableExists.rows[0].exists) {
+            // Table does not exist, so create it and insert data
+            await client.query(`
+                CREATE TABLE products (
+                    id SERIAL PRIMARY KEY,
+                    name VARCHAR(255),
+                    image_url TEXT,
+                    description TEXT
+                );
+            `);
+            console.log('Table products created successfully.');
+
+            const insertRes = await client.query(`
+                INSERT INTO products (name, image_url, description)
+                VALUES 
+                ('ChatGPT', '../../img/chatgpt.jpg', 'ChatGPT Image'),
+                ('Gemini', '../../img/gemini.jpg', 'Gemini Image'),
+                ('WenXinYiYan', '../../img/wenxinyiyan.jpg', 'WenXinYiYan Image');
+            `);
+            console.log(`Inserted ${insertRes.rowCount} rows.`);
+        } else {
+            // Table exists, proceed with other operations (e.g., fetch data)
+            console.log('Table already exists. Ready to perform other operations.');
+        }
+    } catch (error) {
+        console.error('Error executing query:', error.stack);
+    } finally {
+        client.release();
+    }
+}
+
+
   async function createUserTable(){
     const client = await pool.connect();
     try {
@@ -32,4 +83,4 @@ const pool = new Pool({
     }
     
   }
-  export { pool, createUserTable };
+  export { pool, createUserTable, setupProductsTable };

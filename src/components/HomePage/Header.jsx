@@ -1,11 +1,18 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import "../../style/HomePage/Header.css";
-import { useAuth } from "../Sign/AuthContext";
+import { useAuth} from "../Sign/AuthContext";
+import UserMenu from "./UserMenu";
 
 function Header() {
   // Accessing the user state from the UserContext
-  const { currentUser } = useAuth();
+  const { currentUser, signOut } = useAuth();
+
+  const handleLogout = () => {
+
+    // Call the signOut method from the UserContext
+    signOut();
+  }
 
 
   return (
@@ -40,8 +47,9 @@ function Header() {
 
       <div className="action-buttons">
         {currentUser ? (
-          // If user is signed in, display nickname
-          <div className="user-nickname">{currentUser.email}</div>
+          
+            /* If user is signed in, display nickname */
+            <UserMenu />
         ) : (
           // If not signed in, show Login/Sign-up buttons
           <>

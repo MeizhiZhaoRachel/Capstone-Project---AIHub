@@ -22,7 +22,7 @@ export const AuthProvider = ({ children }) => {
   // It sends the user's sign-in credentials to the server and updates the app state with the response
   const signIn = async (formData) => {
     try {
-      const response = await fetch("http://localhost:3000/signin", {
+      const response = await fetch("http://localhost:3000/api/signin", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(formData),
@@ -49,7 +49,7 @@ export const AuthProvider = ({ children }) => {
 
   const signUp = async (formData) => {
     try {
-      const response = await fetch("http://localhost:3000/signup", {
+      const response = await fetch("http://localhost:3000/api/signup", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(formData),

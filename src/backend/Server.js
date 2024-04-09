@@ -33,11 +33,11 @@ catch (error) {console.log("Error creating table:", error);
 createSignUp();
 
 // app.use(cors({
-//   origin: 'http://localhost:3000', // Directly setting the CORS origin
+//   origin: 'http://localhost:3001', // Directly setting the CORS origin
 //   credentials: true,
 // }));
 var corsOptions = {
-  origin: 'http://localhost:3000',  // This should match the origin of your frontend application
+  origin: ['http://localhost:3000', 'http://localhost:3001'],  // This should match the origin of your frontend application
   credentials: true,  // If your frontend needs to send cookies or authorization headers
   methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
   allowedHeaders: 'Content-Type,Authorization'
@@ -47,8 +47,9 @@ app.use(cors(corsOptions));
 app.use(express.json());
 
 // Sign Up Route
-app.post('/api/signup', cors(corsOptions),async (req, res) => {
-  const origin= req.headers.origin
+app.post('/api/signup',async (req, res) => {
+  const origin = req.headers.origin;
+  
   res.header("Access-Control-Allow-Origin", origin); 
   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
   /* req.body should contain the following fields:
@@ -84,9 +85,12 @@ app.post('/api/signup', cors(corsOptions),async (req, res) => {
 });
 
 // Sign In Route
-app.post('/api/signin', cors(corsOptions),async (req, res) => {
+app.post('/api/signin', async (req, res) => {
+  const origin = req.headers.origin;
+  res.header("Access-Control-Allow-Origin", origin); 
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
   const { email, password } = req.body;
-
+  console.log(email, password)
   try {
     // 'UPDATE users SET last_name = $2, password = $3 WHERE email = $1'
     // const values = ['john.doe@example.com', 'Doe', 'hashedpassword123'];
@@ -106,8 +110,8 @@ app.post('/api/signin', cors(corsOptions),async (req, res) => {
         // where user.id is presumably the unique identifier for the user in the database
         // secretOrPrivateKey: The second argument is the secret key used to sign the token. 
         // 'yourSecretKey' should be a strong, unguessable string that only the server knows. 
-        const token = jwt.sign({ userId: user.id }, 'yourSecretKey', { expiresIn: '24h' }); // Directly using a secret key here
-        res.json({ token });
+        const token = jwt.sign({ userId: user.id }, "12e0a976c664d02f47dd021f1229497a05f2503dffda7e9c3740b3de2ff1dd5b", { expiresIn: '24h' }); // Directly using a secret key here
+        res.json({ user, token });
       } else {
         res.status(400).json({ error: 'Invalid credentials' });
       }

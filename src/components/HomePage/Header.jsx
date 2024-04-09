@@ -41,7 +41,7 @@ function Header() {
       <div className="action-buttons">
         {currentUser ? (
           // If user is signed in, display nickname
-          <div className="user-nickname">{currentUser.nickname}</div>
+          <div className="user-nickname">{currentUser.email}</div>
         ) : (
           // If not signed in, show Login/Sign-up buttons
           <>

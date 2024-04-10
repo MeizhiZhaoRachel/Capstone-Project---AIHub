@@ -12,7 +12,6 @@ const reviewContract = new web3.eth.Contract(reviewContractABI, reviewContractAd
 
 function ProductCard({ product }) {
   const [averageRating, setAverageRating] = useState(null);
-
   useEffect(() => {
     const fetchAverageRating = async () => {
       const reviewsData = await reviewContract.methods.getReviewsByProductId(product.id).call();

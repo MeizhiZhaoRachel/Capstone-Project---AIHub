@@ -1,8 +1,8 @@
 // ProductsContext.js
-import React, { createContext, useContext } from "react";
-import chatgptImage from "../../img/chatgpt.jpg";
-import GeminiImage from "../../img/gemini.jpg";
-import WenXinYiYanImage from "../../img/wenxinyiyan.jpg";
+import React, { createContext, useContext, useState, useEffect } from "react";
+// import chatgptImage from "../../img/chatgpt.jpg";
+// import GeminiImage from "../../img/gemini.jpg";
+// import WenXinYiYanImage from "../../img/wenxinyiyan.jpg";
 
 const ProductContext = createContext();
 
@@ -16,10 +16,14 @@ export const ProductProvider = ({ children }) => {
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-      const response = await fetch('/api/products');
+      const response = await fetch('http://localhost:3000/api/products');
       if (!response.ok) throw new Error('Network response was not ok');
       const data = await response.json();
-      setProducts(data);
+      const newData = data.map(product => ({
+        ...product,
+        imageUrl: `/img/${product.imageurl}`
+      }));
+      setProducts(newData);
     } catch (error) {
       console.error("Error fetching data:", error)
     };
@@ -27,6 +31,8 @@ export const ProductProvider = ({ children }) => {
     
     fetchProducts();
 }, []);
+
+
 
   // const products = [
   //   {

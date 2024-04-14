@@ -13,7 +13,7 @@ function SignUp() {
     otherVocation: "",
   });
 
-  const { signUp } = useAuth();
+  const { signUp} = useAuth();
   const navigate = useNavigate();
 
   const handleChange = (e) => {
@@ -35,6 +35,7 @@ function SignUp() {
 
   return (
     <div>
+      
       <h1>Sign Up</h1>
       <form onSubmit={handleSubmit}>
         {/* Personal information inputs */}

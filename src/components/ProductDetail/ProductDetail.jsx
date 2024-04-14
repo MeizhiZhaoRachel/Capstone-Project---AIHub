@@ -5,10 +5,12 @@ import { useProducts } from "./ProductsContext";
 import "../../style/ProductDetail/ProductDetail.css";
 import { useParams } from "react-router-dom";
 
-// Initialize Web3 with the given provider from the browser (e.g., MetaMask).
-const web3 = new Web3(Web3.givenProvider);
+// URL for the Ganache HTTP provider
+const ganacheUrl = "http://localhost:7545";
+// Initialize Web3 with the Ganache HTTP provider
+const web3 = new Web3(new Web3.providers.HttpProvider(ganacheUrl));
 // Smart contract address on the blockchain.
-const reviewContractAddress = "0xbe142227e16007a5eb3f9bc31a9109e5023e2a4e";
+const reviewContractAddress = "0x860771da83fa4f2f4b1c47cc0b0aba8c9b6c0e35";
 // Creates an instance of the smart contract.
 const reviewContract = new web3.eth.Contract(
   reviewContractABI,
@@ -27,39 +29,31 @@ function ProductDetail() {
   // Accesses shared products context.
   const { products } = useProducts();
 
-  /* Use async when you're dealing with operations that return promises
-  Common examples include network requests (e.g., fetching data from an API), 
-  reading files in Node.js, or, as in your case, interacting with smart contracts 
-  on the blockchain.*/
-  const fetchProductDetailsFromBlockchain = async () => {
-    const details = await reviewContract.methods
-      // Function comes from the smart contract ABI
-      .getProductDetail(productId)
-      .call();
-    // Combine blockchain details with context details based on matching ID
-    const contextProductDetails = products.find(
-      (p) => p.id.toString() === productId
-    );
-    // create a new object that merges properties from two existing objects
-    setProductDetails({ ...details, ...contextProductDetails });
-  };
-
-  const fetchReviewsFromBlockchain = async () => {
-    const reviewsData = await reviewContract.methods
-      // Function comes from the smart contract ABI
-      .getReviewsByProductId(productId)
-      .call();
-    setReviews(reviewsData);
-  };
-
   /* Use useEffect to fetch data or run async operations when your component mounts 
   or when specified values change. */
   useEffect(() => {
+    // Find the product details from the provided context
+    const currentProductDetails = products.find( 
+      (product) => product.id.toString() === productId
+    );
+    ;
+    setProductDetails(currentProductDetails); 
+    // Fetch reviews from the blockchain
+    const fetchReviewsFromBlockchain = async () => {
+      try {
+        const reviewsData = await reviewContract.methods
+          .getReviewsByProductId(productId)
+          .call();
+        setReviews(reviewsData);
+      } catch (error) {
+        console.error("Error fetching reviews from blockchain:", error);
+      }
+    };
+
     // Ensure products are loaded from context before attempting to fetch details
-    if (products.length > 0) {
-      fetchProductDetailsFromBlockchain();
+    if (productId && products.length > 0) { 
+      fetchReviewsFromBlockchain();
     }
-    fetchReviewsFromBlockchain();
     /* The array [productId, products] at the end of the useEffect hook is known 
     as the dependencies array. This array tells React to re-run the effect in the 
     useEffect hook whenever any value in this array changes */

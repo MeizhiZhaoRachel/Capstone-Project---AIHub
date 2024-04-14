@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useAuth } from './AuthContext'; 
 import { useNavigate } from 'react-router-dom'; 
 
+
 function SignIn() {
   const [formData, setFormData] = useState({ email: '', password: '' });
   const { signIn } = useAuth();
@@ -29,6 +30,7 @@ function SignIn() {
 
   return (
     <div>
+      
       <h1>Sign In</h1>
       <form onSubmit={handleSubmit}>
         <div>

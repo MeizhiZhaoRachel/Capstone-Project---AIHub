@@ -3,7 +3,27 @@ import React, { useState, useEffect } from "react";
 import reviewContractABI from "../ProductList/reviewContractABI.json";
 import Web3 from "web3";
 import { useParams } from "react-router-dom";
-import { Bar, Pie } from "react-chartjs-2";
+import {
+  Chart, 
+  CategoryScale,
+  LinearScale,
+  BarElement,
+  ArcElement,
+  Tooltip,
+  Legend
+} from 'chart.js';
+import { Bar, Pie } from 'react-chartjs-2';
+
+// Register necessary Chart.js components
+Chart.register(
+  CategoryScale,
+  LinearScale,
+  BarElement,
+  ArcElement,
+  Tooltip,
+  Legend
+);
+
 
 const INFURA_URL =
   "https://sepolia.infura.io/v3/dee208015aa64ad7ac33bdc6c192bc4f";
@@ -18,7 +38,10 @@ function DataAnalysis() {
   const [reviews, setReviews] = useState([]);
   const { productId } = useParams();
   const [ratingCounts, setRatingCounts] = useState([0, 0, 0, 0, 0]);
-  const [vocationData, setVocationData] = useState({ labels: [], datasets: [] });
+  const [vocationData, setVocationData] = useState({
+    labels: [],
+    datasets: [],
+  });
 
   useEffect(() => {
     const fetchReviewsFromBlockchain = async () => {
@@ -37,8 +60,11 @@ function DataAnalysis() {
   }, [productId]);
 
   const analyzeData = (reviews) => {
-    const counts = [1, 2, 3, 4, 5].map(rating =>
-      reviews.filter(review => review.rating === rating && review.productId === productId).length
+    const counts = [1, 2, 3, 4, 5].map(
+      (rating) =>
+        reviews.filter(
+          (review) => review.rating === rating && review.productId === productId
+        ).length
     );
     setRatingCounts(counts);
   };
@@ -91,32 +117,21 @@ function DataAnalysis() {
       },
     ],
   };
+
+  const optionsBar = {
+    scales: {
+      x: { type: 'category' },
+      y: { beginAtZero: true }
+    },
+    responsive: true,
+    maintainAspectRatio: false
+  };
+
   return (
     <div>
       <h1>Data Analysis</h1>
-      <Bar
-        data={data}
-        options={{
-          scales: {
-            yAxes: [
-              {
-                ticks: {
-                  beginAtZero: true,
-                },
-              },
-            ],
-          },
-          responsive: true,
-          maintainAspectRatio: false,
-        }}
-      />
-      <Pie
-        data={vocationData}
-        options={{
-          responsive: true,
-          maintainAspectRatio: false,
-        }}
-      />
+      <Bar data={data} options={optionsBar} />
+      <Pie data={vocationData} options={{ responsive: true, maintainAspectRatio: false }} />
     </div>
   );
 }

@@ -36,9 +36,9 @@ function DataAnalysis() {
     fetchReviewsFromBlockchain();
   }, [productId]);
 
-  const analyzeData = (reviewsData) => {
+  const analyzeData = (reviews) => {
     const counts = [1, 2, 3, 4, 5].map(rating =>
-      reviewsData.filter(review => review.rating === rating && review.productId === productId).length
+      reviews.filter(review => review.rating === rating && review.productId === productId).length
     );
     setRatingCounts(counts);
   };

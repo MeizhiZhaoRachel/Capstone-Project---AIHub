@@ -13,7 +13,7 @@ function WriteReview() {
     productId: "",
     content: "",
     rating: 0,
-    vocation: currentUser.vocation,
+    vocation: currentUser ? currentUser.vocation : "",
   });
   // const contractAddress = '0x1dc66c0bf4d4e389477984f550ff7d98614aefdf'
   // const web3 = new Web3(window.ethereum);
@@ -23,13 +23,13 @@ function WriteReview() {
   const { products } = useProducts();
 
 
-  if (!currentUser) {
-    return (
-      <div>
-        Please <Link to="/signin">sign in</Link> or <Link to="/signup">sign up</Link> to write a review.
-      </div>
-    );
-  }
+  // if (!currentUser) {
+  //   return (
+  //     <div>
+  //       Please <Link to="/signin">login in</Link> or <Link to="/signup">sign up</Link> to write a review.
+  //     </div>
+  //   );
+  // }
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -81,7 +81,10 @@ function WriteReview() {
       >
         Write a review
       </button>
-      {showReviewForm && (
+      {showReviewForm && !currentUser && (    <div>
+        Please <Link to="/signin">login in</Link> or <Link to="/signup">sign up</Link> to write a review.
+      </div>)}
+      {showReviewForm && currentUser && (
         <div className="review-form-container">
           {/* <h2>Write a review</h2> */}
           <form onSubmit={handleFormSubmit}>

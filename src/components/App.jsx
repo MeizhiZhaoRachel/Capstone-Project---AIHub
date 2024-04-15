@@ -17,6 +17,7 @@ import ProductList from "./ProductList/ProductList";
 import SignUp from "./Sign/SignUp";
 import SignIn from "./Sign/SignIn";
 import ContactUs from "./ContactUs/ContactUs.jsx";
+import ThankYou from "./ProductList/ThankYou";
 
 function App() {
   return (
@@ -44,6 +45,7 @@ function App() {
 
               <Route path="/product/:productId" element={<ProductDetail />} />
               <Route path="/about" element={<AboutUs />} />
+              <Route path="/thankyou" element={<ThankYou />} />
               <Route path="/contact" element={<ContactUs />} />
             </Routes>
             <Footer />

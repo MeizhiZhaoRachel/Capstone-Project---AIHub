@@ -4,17 +4,18 @@ import reviewContractABI from "../ProductList/reviewContractABI.json";
 import { useProducts } from "./ProductsContext";
 import "../../style/ProductDetail/ProductDetail.css";
 import { useParams } from "react-router-dom";
+import DataAnalysis from "./DataAnalysis";
 
-// URL for the Ganache HTTP provider
-const ganacheUrl = "http://localhost:7545";
-// Initialize Web3 with the Ganache HTTP provider
-const web3 = new Web3(new Web3.providers.HttpProvider(ganacheUrl));
-// Smart contract address on the blockchain.
-const reviewContractAddress = "0x860771da83fa4f2f4b1c47cc0b0aba8c9b6c0e35";
+// Define the URL for the Infura provider
+const INFURA_URL =
+  "https://sepolia.infura.io/v3/dee208015aa64ad7ac33bdc6c192bc4f";
+  // Smart contract address on the blockchain.
+const contractAddress = "0x296ffee7e9be5f2b57cc1ce417f1ac6030fbb45b";
+const web3 = new Web3(INFURA_URL);
 // Creates an instance of the smart contract.
 const reviewContract = new web3.eth.Contract(
   reviewContractABI,
-  reviewContractAddress
+  contractAddress
 );
 
 function ProductDetail() {
@@ -70,6 +71,7 @@ function ProductDetail() {
       {productDetails.imageUrl && (
         <img src={productDetails.imageUrl} alt={productDetails.name} />
       )}
+      {DataAnalysis ? <DataAnalysis /> : 'No Data Analysis Yet'}
       <h2>Reviews</h2>
       {reviews.length ? (
         /* For each element (review), it also provides the position 

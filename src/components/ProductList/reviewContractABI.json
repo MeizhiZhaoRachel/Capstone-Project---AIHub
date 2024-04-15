@@ -34,6 +34,12 @@
 			},
 			{
 				"indexed": false,
+				"internalType": "string",
+				"name": "vocation",
+				"type": "string"
+			},
+			{
+				"indexed": false,
 				"internalType": "uint256",
 				"name": "timestamp",
 				"type": "uint256"
@@ -90,6 +96,11 @@
 			{
 				"internalType": "string",
 				"name": "_userIdOrEmail",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "_vocation",
 				"type": "string"
 			}
 		],
@@ -174,6 +185,11 @@
 					{
 						"internalType": "string",
 						"name": "userIdOrEmail",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "vocation",
 						"type": "string"
 					},
 					{
@@ -270,6 +286,11 @@
 			{
 				"internalType": "string",
 				"name": "userIdOrEmail",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "vocation",
 				"type": "string"
 			},
 			{

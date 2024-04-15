@@ -12,24 +12,19 @@ const app = express();
 // Define the port number for the server to listen on
 const PORT = 3000;
 
-// Web3 setup
-// URL for the Ganache HTTP provider
-const ganacheUrl = "http://localhost:7545";
-const web3 = new Web3(new Web3.providers.HttpProvider(ganacheUrl));
-const contractAddress = "0x860771da83fa4f2f4b1c47cc0b0aba8c9b6c0e35";
+// Define the URL for the Infura provider
+const INFURA_URL =
+  "https://sepolia.infura.io/v3/dee208015aa64ad7ac33bdc6c192bc4f";
+const contractAddress = "0x296ffee7e9be5f2b57cc1ce417f1ac6030fbb45b";
+const web3 = new Web3(INFURA_URL);
 const reviewContract = new web3.eth.Contract(
   reviewContractABI,
   contractAddress
 );
-
-// PostgreSQL client configuration for connection pooling
-// const pool = new Pool({
-//   user: 'postgres',
-//   password: '123456',
-//   database: 'AIHub',
-//   host: '35.244.76.220',
-//   port: 5432,
-// });
+// Web3 setup
+// URL for the Ganache HTTP provider
+// const ganacheUrl = "http://localhost:7545";
+// const web3 = new Web3(new Web3.providers.HttpProvider(ganacheUrl));
 
 async function createProducts() {
   try {
@@ -68,44 +63,80 @@ app.use(cors(corsOptions));
 app.use(express.json());
 
 app.post("/api/reviews", async (req, res) => {
-  let { productId, content, rating, userIdOrEmail } = req.body;
-
-  // Convert productId to a string if it's not already
-  productId = String(productId);
+  const { productId, content, rating, userIdOrEmail, vocation } = req.body;
+  let errors = [];
 
   // Validate data here
-  if (!productId || !content || rating == null || !userIdOrEmail) {
-    return res.status(400).json({ error: "Missing required fields" });
+  // if (!productId || !content || rating == null || !userIdOrEmail) {
+  //   return res.status(400).json({ error: "Missing required fields" });
+  // }
+
+  // Check for missing content
+  if (!content) {
+    errors.push("Content is required.");
+  }
+
+  // Check for missing product ID
+  if (!productId) {
+    errors.push("Product ID is required.");
+  }
+
+  // Check for missing or invalid rating
+  if (rating == null) {
+    errors.push("Rating is required and must be a number.");
+  }
+
+  // Check for missing user identifier
+  if (!userIdOrEmail) {
+    errors.push("User identifier is required.");
+  }
+
+  // If there are any errors, return them all in the response
+  if (errors.length > 0) {
+    console.log("Sending errors:", errors); // Log the errors to check
+    return res.status(400).json({ errors: errors });
   }
 
   try {
-    // Fetch the first account from your local blockchain node
-    const accounts = await web3.eth.getAccounts();
-    // Assume you have a function that prepares and sends the transaction
-    const receipt = await reviewContract.methods
-      .writeReview(productId, content, rating, userIdOrEmail)
-      .send({ from: accounts[0] }); // Using the first account to send the transaction
-
+    // Encode the function call to the smart contract
+    const data = reviewContract.methods
+      .writeReview(productId.toString(), content, rating, userIdOrEmail, vocation)
+      .encodeABI();
     res.json({
-      message: "Review submitted successfully",
-      transactionId: receipt.transactionHash,
-      details: receipt,
+      message: "Transaction data prepared",
+      transactionData: data,
+      contractAddress: contractAddress,
     });
   } catch (error) {
-    console.error("Failed to submit review:", error);
-    res.status(500).json({ error: "Failed to submit review" });
+    console.error("Error preparing transaction:", error);
+    res.status(500).json({ error: "Error preparing transaction" });
   }
 });
+//   // Fetch the first account from your local blockchain node
+//   const accounts = await web3.eth.getAccounts();
+//   // Assume you have a function that prepares and sends the transaction
+//   const receipt = await reviewContract.methods
+//     .writeReview(productId, content, rating, userIdOrEmail)
+//     .send({ from: accounts[0] }); // Using the first account to send the transaction
+
+//   res.json({
+//     message: "Review submitted successfully",
+//     transactionId: receipt.transactionHash,
+//     details: receipt,
+//   });
+// } catch (error) {
+//   console.error("Failed to submit review:", error);
+//   res.status(500).json({ error: "Failed to submit review" });
+// }
 
 // Set up review contract route
 app.get("/api/reviews", async (req, res) => {
-  const origin = req.headers.origin;
-  res.header("Access-Control-Allow-Origin", origin);
-  res.header(
-    "Access-Control-Allow-Headers",
-    "Origin, X-Requested-With, Content-Type, Accept"
-  );
-
+  // const origin = req.headers.origin;
+  // res.header("Access-Control-Allow-Origin", origin);
+  // res.header(
+  //   "Access-Control-Allow-Headers",
+  //   "Origin, X-Requested-With, Content-Type, Accept"
+  // );
   try {
     const events = await reviewContract.getPastEvents("ReviewAdded", {
       fromBlock: 0,

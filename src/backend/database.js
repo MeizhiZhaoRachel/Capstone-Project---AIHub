@@ -11,9 +11,9 @@ const pool = new Pool({
 
 // const pool = new Pool({
 //     user: 'postgres',
-//    password: '123456',
-//     database: 'AIHub',
-//     host: '35.244.76.220',
+//    password: '1230',
+//     database: 'postgres',
+//     host: 'localhost',
 //     port: 5432,
 //  });
 
@@ -34,18 +34,18 @@ const pool = new Pool({
                 CREATE TABLE products (
                     id SERIAL PRIMARY KEY,
                     name VARCHAR(255),
-                    image_url TEXT,
+                    imageurl TEXT,
                     description TEXT
                 );
             `);
             console.log('Table products created successfully.');
 
             const insertRes = await client.query(`
-                INSERT INTO products (name, image_url, description)
+                INSERT INTO products (name, imageurl, description)
                 VALUES 
-                ('ChatGPT', '../../img/chatgpt.jpg', 'ChatGPT Image'),
-                ('Gemini', '../../img/gemini.jpg', 'Gemini Image'),
-                ('WenXinYiYan', '../../img/wenxinyiyan.jpg', 'WenXinYiYan Image');
+                ('ChatGPT', 'chatgpt.jpg', 'ChatGPT Image'),
+                ('Gemini', 'gemini.jpg', 'Gemini Image'),
+                ('WenXinYiYan', 'wenxinyiyan.jpg', 'WenXinYiYan Image');
             `);
             console.log(`Inserted ${insertRes.rowCount} rows.`);
         } else {

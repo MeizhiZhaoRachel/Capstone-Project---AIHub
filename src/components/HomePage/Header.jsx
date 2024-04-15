@@ -1,19 +1,12 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import "../../style/HomePage/Header.css";
-import { useAuth} from "../Sign/AuthContext";
+import { useAuth } from "../Sign/AuthContext";
 import UserMenu from "./UserMenu";
 
 function Header() {
   // Accessing the user state from the UserContext
   const { currentUser, signOut } = useAuth();
-
-  const handleLogout = () => {
-
-    // Call the signOut method from the UserContext
-    signOut();
-  }
-
 
   return (
     <header className="custom-header">
@@ -32,7 +25,7 @@ function Header() {
       </div>
       <nav className="nav-links">
         <ul>
-        <li>
+          <li>
             <Link to="/">Home </Link>
           </li>
           <li>
@@ -47,9 +40,8 @@ function Header() {
 
       <div className="action-buttons">
         {currentUser ? (
-          
-            /* If user is signed in, display nickname */
-            <UserMenu />
+          /* If user is signed in, display nickname */
+          <UserMenu />
         ) : (
           // If not signed in, show Login/Sign-up buttons
           <>
@@ -61,10 +53,9 @@ function Header() {
             </Link>
           </>
         )}
-        </div>
+      </div>
     </header>
   );
 }
-
 
 export default Header;

@@ -6,21 +6,27 @@ import reviewContractABI from "./reviewContractABI.json";
 import Web3 from "web3";
 
 // URL for the Ganache HTTP provider
-const ganacheUrl = "http://localhost:7545";
+// const ganacheUrl = "http://localhost:7545";
 // Initialize Web3 with the Ganache HTTP provider
-const web3 = new Web3(new Web3.providers.HttpProvider(ganacheUrl));
-const reviewContractAddress = "0x860771da83fa4f2f4b1c47cc0b0aba8c9b6c0e35";
+// const web3 = new Web3(new Web3.providers.HttpProvider(ganacheUrl));
+const INFURA_URL =
+  "https://sepolia.infura.io/v3/dee208015aa64ad7ac33bdc6c192bc4f";
+const web3 = new Web3(INFURA_URL);
+const reviewContractAddress = "0x296ffee7e9be5f2b57cc1ce417f1ac6030fbb45b";
 const reviewContract = new web3.eth.Contract(
   reviewContractABI,
   reviewContractAddress
 );
 
+
 function ProductCard({ product }) {
   const [averageRating, setAverageRating] = useState(null);
   useEffect(() => {
     async function fetchAverageRating() {
-      const productIdString = String(product.id); // Ensure productId is a string
+      
+      if (reviewContract) {// Ensure productId is a string
       try {
+        const productIdString = String(product.id); 
         const reviewsData = await reviewContract.methods
           .getReviewsByProductId(productIdString)
           .call();
@@ -37,10 +43,14 @@ function ProductCard({ product }) {
           setAverageRating("No ratings yet");
         }
       } catch (error) {
-        console.error("Error fetching reviews:", error);
+        console.error("Error fetching reviews with MetaMask:", error);
         setAverageRating("Error fetching ratings");
       }
+    } else {
+      console.log('MetaMask is not installed');
+      setAverageRating("MetaMask not available");
     }
+  }
 
     if (product.id) {
       fetchAverageRating();

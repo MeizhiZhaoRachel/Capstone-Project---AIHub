@@ -60,6 +60,25 @@ function WriteReview() {
     }
   };
 
+  async function getAccount() {
+    // Check if MetaMask is installed on user's browser
+    if (window.ethereum) {
+      try {
+        // Request account access if needed
+        await window.ethereum.request({ method: 'eth_requestAccounts' });
+  
+        // Accounts now exposed, get the list of accounts
+        const accounts = await web3.eth.getAccounts();
+        return accounts[0];
+      } catch (error) {
+        throw new Error('User denied account access or an error occurred.');
+      }
+    } else {
+      // If MetaMask is not installed, alert the user
+      alert('MetaMask is not installed. Please consider installing it: https://metamask.io/download.html');
+    }
+  }
+
   const submitReview = async () => {
     try {
     const response = await fetch("http://localhost:3000/api/reviews", {
@@ -72,22 +91,53 @@ function WriteReview() {
     });
     console.log(response);
 
-    if(response.ok) {
-      setReview({productId: "",
-      content: "",
-      rating: 0,
-      userIdOrEmail: "",
-      vocation: "",})
-    }
+    if (response.ok) {
+      const responseBody = await response.json();
 
-    navigate('/thankyou');
- 
+      // Ensure the window.ethereum object is available.
+      if (window.ethereum) {
+        // Request account access
+        const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
+
+        if (accounts.length === 0) {
+          throw new Error('No Ethereum account available.');
+        }
+
+        const account = accounts[0]; // The selected account in MetaMask
+
+        // Ensure the account is a valid Ethereum address
+        if (!web3.utils.isAddress(account)) {
+          throw new Error('Invalid Ethereum address.');
+        }
+
+        // Now use MetaMask to send the transaction
+        const txHash = await window.ethereum.request({
+          method: 'eth_sendTransaction',
+          params: [{
+            from: account,
+            to: reviewContractAddress,
+            data: responseBody.transactionData,
+            value: '0x0', // Ensure this is a hex string
+          }],
+        });
+
+        console.log("Transaction Hash:", txHash);
+
+        navigate('/thankyou');
+      } else {
+        throw new Error('MetaMask is not installed.');
+      }
+    } else {
+      // Handle errors from your API
+      const errorResponse = await response.json();
+      console.error('Failed to submit review:', errorResponse);
+      alert('Failed to submit review: ' + (errorResponse.errors.join(', ') || 'Unknown error'));
+    }
   } catch (error) {
     console.error('Error submitting the review:', error);
-    alert('Failed to submit review');
+    alert('Failed to submit review. ' + error.message);
   }
- 
-  };
+};
 
   const handleFormSubmit = (e) => {
     e.preventDefault();

@@ -64,6 +64,10 @@ app.use(express.json());
 
 app.post("/api/reviews", async (req, res) => {
   const { productId, content, rating, userIdOrEmail, vocation } = req.body;
+  const parsedRating = parseInt(rating, 10);
+if (isNaN(parsedRating)) {
+  errors.push("Rating must be a valid number.");
+}
   let errors = [];
 
   // Validate data here
@@ -91,9 +95,6 @@ app.post("/api/reviews", async (req, res) => {
     errors.push("Product ID is required.");
   }
 
- 
-
-  
   // If there are any errors, return them all in the response
   if (errors.length > 0) {
     console.log("Sending errors:", errors); // Log the errors to check
@@ -103,12 +104,17 @@ app.post("/api/reviews", async (req, res) => {
   try {
     // Encode the function call to the smart contract
     const data = reviewContract.methods
-      .writeReview(productId.toString(), content, rating, userIdOrEmail, vocation)
+      .writeReview(productId.toString(), content, parsedRating, userIdOrEmail, vocation)
       .encodeABI();
     res.json({
       message: "Transaction data prepared",
       transactionData: data,
       contractAddress: contractAddress,
+      productId:productId.toString(),
+      content:content,
+      rating:parsedRating,
+      userIdOrEmail:userIdOrEmail,
+      vocation:vocation
     });
   } catch (error) {
     console.error("Error preparing transaction:", error);
@@ -156,7 +162,7 @@ app.get("/api/reviews", async (req, res) => {
   }
 });
 
-// Get all products route
+// // Get all products route
 app.get("/api/products", async (req, res) => {
   const origin = req.headers.origin;
   res.header("Access-Control-Allow-Origin", origin);

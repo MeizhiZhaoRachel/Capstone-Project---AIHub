@@ -4,15 +4,15 @@ import reviewContractABI from "../ProductList/reviewContractABI.json";
 import Web3 from "web3";
 import { useParams } from "react-router-dom";
 import {
-  Chart, 
+  Chart,
   CategoryScale,
   LinearScale,
   BarElement,
   ArcElement,
   Tooltip,
-  Legend
-} from 'chart.js';
-import { Bar, Pie } from 'react-chartjs-2';
+  Legend,
+} from "chart.js";
+import { Bar, Pie } from "react-chartjs-2";
 
 // Register necessary Chart.js components
 Chart.register(
@@ -23,7 +23,6 @@ Chart.register(
   Tooltip,
   Legend
 );
-
 
 const INFURA_URL =
   "https://sepolia.infura.io/v3/dee208015aa64ad7ac33bdc6c192bc4f";
@@ -49,9 +48,14 @@ function DataAnalysis() {
         const reviewsData = await reviewContract.methods
           .getReviewsByProductId(productId)
           .call();
-        setReviews(reviewsData);
-        analyzeData(reviewsData);
-        analyzeVocations(reviewsData);
+
+        const parsedReviewsData = reviewsData.map((review) => ({
+          ...review,
+          rating: parseInt(review.rating, 10),
+        }));
+        setReviews(parsedReviewsData);
+        analyzeData(parsedReviewsData);
+        analyzeVocations(parsedReviewsData);
       } catch (error) {
         console.error("Error fetching reviews:", error);
       }
@@ -120,18 +124,21 @@ function DataAnalysis() {
 
   const optionsBar = {
     scales: {
-      x: { type: 'category' },
-      y: { beginAtZero: true }
+      x: { type: "category" },
+      y: { beginAtZero: true },
     },
     responsive: true,
-    maintainAspectRatio: false
+    maintainAspectRatio: false,
   };
 
   return (
     <div>
       <h1>Data Analysis</h1>
       <Bar data={data} options={optionsBar} />
-      <Pie data={vocationData} options={{ responsive: true, maintainAspectRatio: false }} />
+      <Pie
+        data={vocationData}
+        options={{ responsive: true, maintainAspectRatio: false }}
+      />
     </div>
   );
 }

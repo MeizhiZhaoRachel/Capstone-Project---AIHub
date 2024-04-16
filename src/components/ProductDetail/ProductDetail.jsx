@@ -45,7 +45,11 @@ function ProductDetail() {
         const reviewsData = await reviewContract.methods
           .getReviewsByProductId(productId)
           .call();
-        setReviews(reviewsData);
+          const parsedReviewsData = reviewsData.map((review) => ({
+            ...review,
+            rating:parseInt(review.rating, 10),
+          }));
+        setReviews(parsedReviewsData);
       } catch (error) {
         console.error("Error fetching reviews from blockchain:", error);
       }
@@ -71,7 +75,7 @@ function ProductDetail() {
       {productDetails.imageUrl && (
         <img src={productDetails.imageUrl} alt={productDetails.name} />
       )}
-      {DataAnalysis ? <DataAnalysis /> : 'No Data Analysis Yet'}
+      {/* {DataAnalysis ? <DataAnalysis /> : 'No Data Analysis Yet'}  */}
       <h2>Reviews</h2>
       {reviews.length ? (
         /* For each element (review), it also provides the position 
@@ -80,8 +84,16 @@ function ProductDetail() {
           /* React requires a key prop on elements in a list to create 
           a stable identity for each element */
           <div key={index} className="review">
+            <div className="review-rating">
+              {/* Display a star for each rating point */}
+              {/* it expands the elements of the array into individual elements */}
+              {/* _ represents the current element of the array during each iteration */}
+              {[...Array(review.rating)].map((_, i) => (
+                <span key={i}>★</span>
+              ))}
+            </div>
             <p>Content: {review.content}</p>
-            <p>Rating: {review.rating}</p>
+            
           </div>
         ))
       ) : (

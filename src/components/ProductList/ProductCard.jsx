@@ -18,39 +18,46 @@ const reviewContract = new web3.eth.Contract(
   reviewContractAddress
 );
 
-
 function ProductCard({ product }) {
   const [averageRating, setAverageRating] = useState(null);
   useEffect(() => {
     async function fetchAverageRating() {
-      
-      if (reviewContract) {// Ensure productId is a string
-      try {
-        const productIdString = String(product.id); 
-        const reviewsData = await reviewContract.methods
-          .getReviewsByProductId(productIdString)
-          .call();
+      if (reviewContract) {
+        // Ensure productId is a string
+        try {
+          const productIdString = String(product.id);
+          const reviewsData = await reviewContract.methods
+            .getReviewsByProductId(productIdString)
+            .call();
 
-        if (reviewsData.length > 0) {
-          const total = reviewsData.reduce(
-            (acc, review) => acc + parseInt(review.rating, 10),
-            0
-          );
-          const average = total / reviewsData.length;
-          // Keeping one decimal for average rating
-          setAverageRating(average.toFixed(1)); 
-        } else {
-          setAverageRating("No ratings yet");
+          // Parse the rating from string to integer
+          const parsedReviewsData = reviewsData.map((review) => {
+            return {
+              ...review,
+              rating: parseInt(review.rating, 10), // Parses the string rating to an integer
+            };
+          });
+
+          if (parsedReviewsData.length > 0) {
+            const total = parsedReviewsData.reduce(
+              (acc, review) => acc + parseInt(review.rating, 10),
+              0
+            );
+            const average = total / parsedReviewsData.length;
+            // Keeping one decimal for average rating
+            setAverageRating(average.toFixed(1));
+          } else {
+            setAverageRating("No ratings yet");
+          }
+        } catch (error) {
+          console.error("Error fetching reviews with MetaMask:", error);
+          setAverageRating("Error fetching ratings");
         }
-      } catch (error) {
-        console.error("Error fetching reviews with MetaMask:", error);
-        setAverageRating("Error fetching ratings");
+      } else {
+        console.log("MetaMask is not installed");
+        setAverageRating("MetaMask not available");
       }
-    } else {
-      console.log('MetaMask is not installed');
-      setAverageRating("MetaMask not available");
     }
-  }
 
     if (product.id) {
       fetchAverageRating();

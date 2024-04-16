@@ -1,10 +1,20 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useProducts } from "../ProductDetail/ProductsContext";
 import { useAuth } from "../Sign/AuthContext";
 import { Link } from "react-router-dom";
 import "../../style/ProductList/WriteReview.css";
 import { useNavigate } from 'react-router-dom';
-// import reviewContractABI from "../components/ProductList/reviewContractABI.json" assert { type: "json" };
+import reviewContractABI from "./reviewContractABI.json";
+import Web3 from "web3";
+
+const INFURA_URL =
+  "https://sepolia.infura.io/v3/dee208015aa64ad7ac33bdc6c192bc4f";
+const web3 = new Web3(INFURA_URL);
+const reviewContractAddress = "0x296ffee7e9be5f2b57cc1ce417f1ac6030fbb45b";
+const reviewContract = new web3.eth.Contract(
+  reviewContractABI,
+  reviewContractAddress
+);
 
 function WriteReview() {
   const [showReviewForm, setShowReviewForm] = useState(false);
@@ -13,14 +23,23 @@ function WriteReview() {
     productId: "",
     content: "",
     rating: 0,
-    vocation: currentUser ? currentUser.vocation : "",
+    userIdOrEmail: "",
+    vocation: "",
   });
   // const contractAddress = '0x1dc66c0bf4d4e389477984f550ff7d98614aefdf'
   // const web3 = new Web3(window.ethereum);
   // const contractAddress = process.env.REACT_APP_CONTRACT_ADDRESS;
 
+  
+
   const navigate = useNavigate(); // instantiate useNavigate
   const { products } = useProducts();
+
+  useEffect(() => {
+    if (currentUser) {
+      setReview(prev => ({ ...prev, userIdOrEmail: currentUser.email, vocation: currentUser.vocation }));
+    }
+  }, [currentUser]);
 
 
   // if (!currentUser) {
@@ -48,7 +67,7 @@ function WriteReview() {
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ ...review, userIdOrEmail: currentUser.email }),
+      body: JSON.stringify({ ...review }),
       
     });
     console.log(response);
@@ -56,7 +75,9 @@ function WriteReview() {
     if(response.ok) {
       setReview({productId: "",
       content: "",
-      rating: 0,})
+      rating: 0,
+      userIdOrEmail: "",
+      vocation: "",})
     }
 
     navigate('/thankyou');
@@ -92,7 +113,7 @@ function WriteReview() {
               name="productId"
               onChange={handleInputChange}
               value={review.productId}
-            >
+            ><option value="" disabled>Select a product</option>
               {products.map((product) => (
                 <option key={product.id} value={product.id.toString()}>
                   {product.name}

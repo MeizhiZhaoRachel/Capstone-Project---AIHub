@@ -71,6 +71,16 @@ app.post("/api/reviews", async (req, res) => {
   //   return res.status(400).json({ error: "Missing required fields" });
   // }
 
+   // Check for missing or invalid rating
+   if (rating == null) {
+    errors.push("Rating is required and must be a number.");
+  }
+
+  // Check for missing user identifier
+  if (!userIdOrEmail) {
+    errors.push("User identifier is required.");
+  }
+
   // Check for missing content
   if (!content) {
     errors.push("Content is required.");
@@ -81,16 +91,9 @@ app.post("/api/reviews", async (req, res) => {
     errors.push("Product ID is required.");
   }
 
-  // Check for missing or invalid rating
-  if (rating == null) {
-    errors.push("Rating is required and must be a number.");
-  }
+ 
 
-  // Check for missing user identifier
-  if (!userIdOrEmail) {
-    errors.push("User identifier is required.");
-  }
-
+  
   // If there are any errors, return them all in the response
   if (errors.length > 0) {
     console.log("Sending errors:", errors); // Log the errors to check

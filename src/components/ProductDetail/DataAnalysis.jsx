@@ -13,6 +13,8 @@ import {
   Legend,
 } from "chart.js";
 import { Bar, Pie } from "react-chartjs-2";
+import "../../style/ProductDetail/DataAnalysis.css";
+
 
 // Register necessary Chart.js components
 Chart.register(
@@ -54,8 +56,8 @@ function DataAnalysis() {
           rating: parseInt(review.rating, 10),
         }));
         setReviews(parsedReviewsData);
-        analyzeData(parsedReviewsData);
-        analyzeVocations(parsedReviewsData);
+        analyzeData(reviews);
+        analyzeVocations(reviews);
       } catch (error) {
         console.error("Error fetching reviews:", error);
       }
@@ -132,7 +134,7 @@ function DataAnalysis() {
   };
 
   return (
-    <div>
+    <div  className="chart-container">
       <h1>Data Analysis</h1>
       <Bar data={data} options={optionsBar} />
       <Pie

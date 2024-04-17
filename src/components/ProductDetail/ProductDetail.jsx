@@ -75,7 +75,7 @@ function ProductDetail() {
       {productDetails.imageUrl && (
         <img src={productDetails.imageUrl} alt={productDetails.name} />
       )}
-      {/* {DataAnalysis ? <DataAnalysis /> : 'No Data Analysis Yet'}  */}
+      {DataAnalysis ? <DataAnalysis /> : 'No Data Analysis Yet'} 
       <h2>Reviews</h2>
       {reviews.length ? (
         /* For each element (review), it also provides the position 

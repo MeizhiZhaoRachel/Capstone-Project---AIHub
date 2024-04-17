@@ -1,0 +1,8 @@
+/* DataAnalysis.css */
+.chart-container {
+    width: 600px; /* Set the width as needed */
+    height: 400px; /* Set the height as needed */
+    margin: auto; /* This centers the chart in the middle of the page */
+    position: relative; /* for Chart.js absolute positioning inside */
+  }
+  

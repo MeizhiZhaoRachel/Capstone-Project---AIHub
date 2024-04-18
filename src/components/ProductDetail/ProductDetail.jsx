@@ -115,31 +115,30 @@ function ProductDetail() {
         <WriteReview />
       </div>
 
-      <div className="dataReview-container">
-        <div className="dataAnalysis">
-          {" "}
-          {DataAnalysis ? <DataAnalysis /> : "No Data Analysis Yet"}{" "}
-        </div>
+      <div className="dataAnalysis">
+        {" "}
+        {DataAnalysis ? <DataAnalysis /> : "No Data Analysis Yet"}{" "}
+      </div>
 
-        <h2 className="review-title">Attribute Reviews</h2>
-        <div className="reviews-container">
-          {reviews.length ? (
-            /* For each element (review), it also provides the position 
+      
+      <div className="reviews-container">
+      <h2 className="review-title">Attribute Reviews</h2>
+        {reviews.length ? (
+          /* For each element (review), it also provides the position 
         of that element within the array (index). */
-            reviews.map((review, index) => (
-              /* React requires a key prop on elements in a list to create 
+          reviews.map((review, index) => (
+            /* React requires a key prop on elements in a list to create 
           a stable identity for each element */
-              <div key={index} className="review">
-                <div className="review-rating">
-                  <StarRating averageRating={review.rating} />
-                </div>
-                <p>Content: {review.content}</p>
+            <div key={index} className="review">
+              <div className="review-rating">
+                <StarRating averageRating={review.rating} />
               </div>
-            ))
-          ) : (
-            <p>No reviews yet.</p>
-          )}
-        </div>
+              <p>Content: {review.content}</p>
+            </div>
+          ))
+        ) : (
+          <p>No reviews yet.</p>
+        )}
       </div>
     </div>
   );

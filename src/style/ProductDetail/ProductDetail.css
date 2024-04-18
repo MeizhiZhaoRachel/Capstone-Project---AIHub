@@ -42,39 +42,31 @@
     margin-top: 30px;
 }
 
-.dataReview-container {
+.dataAnalysis {
     display: grid;
     grid-column: 5 / 12;
-    grid-row: 3 / 12;
-    background-color:#F9F7F7;
-    border-radius: 20px;
-    padding: 20px;
-    margin-top: 30px;
-}
-
-.dataAnalysis {
-    grid-area: 3 / 2 / 3 / 5;
-    grid-row: 3 / 180;
+    grid-row: 3 / 5;
     margin-top: 10px;
     margin-bottom: 120px;
 }
 
-
-.review-title {
-    grid-column: 5 / 12;
-    grid-row: 44 / 44;
-    text-align: left;
-}
-
-
 .reviews-container {
-    grid-column: 5 / 12;
-    grid-row: 45 / 80;
     display: grid;
+    grid-column: 5 / 12;
+    grid-row: 6 / 12;
     grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
     padding: 20px;
     border-radius: 10px;
     margin-bottom:20px;
+    overflow: hidden;
+    min-height: 500px; 
+    gap: 20px;
+}
+
+.review-title {
+    grid-column: 1 / -1; /* Span across all columns */
+    grid-row: 1; /* Place on the first row */
+    text-align: left; /* Align text to the left */
 }
 
 .review {
@@ -82,6 +74,7 @@
     border-radius: 5px;
     background: #ffffff;
     border: 1px #ccc;
+    margin-bottom: 20px;
 }
 
 .review-rating {

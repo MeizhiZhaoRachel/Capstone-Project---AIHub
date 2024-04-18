@@ -6,7 +6,8 @@ import "../../style/ProductDetail/ProductDetail.css";
 import { useParams } from "react-router-dom";
 import DataAnalysis from "./DataAnalysis";
 import WriteReview from "../../components/ProductList/WriteReview";
-import { averageRating } from "../../components/ProductList/ProductCard";
+import { useReview } from "./BlockChainReview";
+import StarRating from "./StarRating";
 
 // Define the URL for the Infura provider
 const INFURA_URL =
@@ -31,6 +32,7 @@ function ProductDetail() {
   const { productId } = useParams();
   // Accesses shared products context.
   const { products } = useProducts();
+  const [averageRating, setAverageRating] = useState(null);
 
   /* Use useEffect to fetch data or run async operations when your component mounts 
   or when specified values change. */
@@ -50,7 +52,18 @@ function ProductDetail() {
           ...review,
           rating: parseInt(review.rating, 10),
         }));
-        setReviews(parsedReviewsData);
+        if (parsedReviewsData.length > 0) {
+          const total = parsedReviewsData.reduce(
+            (acc, review) => acc + parseInt(review.rating, 10),
+            0
+          );
+          const average = total / parsedReviewsData.length;
+          // Keeping one decimal for average rating
+          setAverageRating(average.toFixed(1));
+          setReviews(parsedReviewsData);
+        } else {
+          setAverageRating("No ratings yet");
+        }
       } catch (error) {
         console.error("Error fetching reviews from blockchain:", error);
       }
@@ -78,16 +91,21 @@ function ProductDetail() {
           alt={productDetails.name}
         />
       )}
-      <div className="review-rating">
-        {[...Array(averageRating)].map((_, i) => (
-          <span key={i}>★</span>
-        ))}{" "}
-      </div>
+      <span className="stars">
+        {" "}
+        <StarRating averageRating={averageRating} />
+      </span>
       <div class="review-summary">
-        {averageRating && <p>Rating: {averageRating} / 5</p>}{" "}
+        {averageRating && (
+          <p>
+            {" "}
+            <span className="scoreBlue">Score: </span>
+            {averageRating} out of 5
+          </p>
+        )}{" "}
       </div>
 
-      <div className="writeReview">
+      <div className="writeReview-container">
         <p>
           {" "}
           ★ <br />
@@ -97,36 +115,33 @@ function ProductDetail() {
         <WriteReview />
       </div>
 
-      <div className="dataAnalysis">
-        {" "}
-        {DataAnalysis ? <DataAnalysis /> : "No Data Analysis Yet"}{" "}
-      </div>
+      <div className="dataReview-container">
+        <div className="dataAnalysis">
+          {" "}
+          {DataAnalysis ? <DataAnalysis /> : "No Data Analysis Yet"}{" "}
+        </div>
 
-      <h2 className="review-title">Attribute Reviews</h2>
-      <div className="reviews-container">
-        {reviews.length ? (
-          /* For each element (review), it also provides the position 
+        <h2 className="review-title">Attribute Reviews</h2>
+        <div className="reviews-container">
+          {reviews.length ? (
+            /* For each element (review), it also provides the position 
         of that element within the array (index). */
-          reviews.map((review, index) => (
-            /* React requires a key prop on elements in a list to create 
+            reviews.map((review, index) => (
+              /* React requires a key prop on elements in a list to create 
           a stable identity for each element */
-            <div key={index} className="review">
-              <div className="review-rating">
-                {/* Display a star for each rating point */}
-                {/* it expands the elements of the array into individual elements */}
-                {/* _ represents the current element of the array during each iteration */}
-                {[...Array(review.rating)].map((_, i) => (
-                  <span key={i}>★</span>
-                ))}
+              <div key={index} className="review">
+                <div className="review-rating">
+                  <StarRating averageRating={review.rating} />
+                </div>
+                <p>Content: {review.content}</p>
               </div>
-              <p>Content: {review.content}</p>
-            </div>
-          ))
-        ) : (
-          <p>No reviews yet.</p>
-        )}
+            ))
+          ) : (
+            <p>No reviews yet.</p>
+          )}
+        </div>
       </div>
-      </div>
+    </div>
   );
 }
 

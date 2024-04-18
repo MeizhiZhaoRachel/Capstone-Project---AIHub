@@ -4,6 +4,8 @@ import "../../style/ProductList/ProductCard.css";
 import React, { useState, useEffect } from "react";
 import reviewContractABI from "./reviewContractABI.json";
 import Web3 from "web3";
+import StarRating from "../ProductDetail/StarRating";
+
 
 // URL for the Ganache HTTP provider
 // const ganacheUrl = "http://localhost:7545";
@@ -76,6 +78,7 @@ function ProductCard({ product }) {
         <div className="product-info">
           <h3>{product.name}</h3>
           <p>{product.description}</p>
+          <StarRating averageRating={averageRating} />
           {averageRating && <p>Rating: {averageRating} / 5</p>}
         </div>
       </div>
@@ -84,4 +87,3 @@ function ProductCard({ product }) {
 }
 
 export default ProductCard;
-export const averageRating = ProductCard.averageRating;

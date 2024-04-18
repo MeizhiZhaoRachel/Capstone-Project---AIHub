@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import { AuthProvider } from "./Sign/AuthContext";
 import ProtectedRoute from "./Sign/ProtectedRoute";
 import { ProductProvider } from "./ProductDetail/ProductsContext";
+import { ReviewProvider } from "./ProductDetail/BlockChainReview";
 
 import AboutUs from "./AboutUs/AboutUs.jsx";
 import Header from "./HomePage/Header";
@@ -21,7 +22,6 @@ import ThankYou from "./ProductList/ThankYou";
 
 function App() {
   return (
-
       <AuthProvider>
         <ProductProvider>
           <Router>
@@ -52,6 +52,7 @@ function App() {
           </Router>
         </ProductProvider>
       </AuthProvider>
+  
   );
 }
 

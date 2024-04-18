@@ -1,0 +1,11 @@
+.star-button {
+    background-color: transparent; /* No background */
+    border: none; /* No border */
+    cursor: pointer; /* Changes cursor to pointer to indicate it's clickable */
+    color: grey; /* Default star color */
+  }
+  
+  /* This CSS will apply to the stars that have been selected (clicked) */
+  .star-button.selected {
+    color: orange; /* Changes color to yellow */
+  }

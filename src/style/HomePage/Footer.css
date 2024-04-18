@@ -1,0 +1,86 @@
+
+.custom-footer {
+    display: grid;
+    background-color: white;
+    color: grey;
+    grid-template-columns: repeat(12, 1fr);
+    grid-template-rows: repeat(12, 1fr);
+    height: 300px;
+    font-size: 0.9em;
+    background-color: #F9F7F7;
+}
+
+.footer-logo {
+    grid-area: 5 / 2 / 6 / 3;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    font-weight: bold;
+    font-size: 1.5em;
+    margin-bottom: 10px;
+}
+
+
+.footer-text {
+    grid-area: 6 / 2 / 7 / 7;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    flex-direction: column;
+    font-size: 0.9em;
+}
+
+.footer-column1 {
+    grid-area: 5 / 9 / 9 / 10;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.footer-column2 {
+    grid-area: 5 / 10 / 9 / 11;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    flex-direction: column;
+    
+}
+
+.footer-column3 {
+    grid-area: 5 / 11 / 9 / 12;
+    display: flex;
+    justify-content: flex-start;
+    flex-direction: column;
+    align-items: center;
+}
+
+.footer-copyright {
+    grid-area: 11 / 6 / 12 / 9;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.custom-footer li {
+    list-style: none;
+    margin: 10px 0;
+}
+/* Additional styling for better appearance */
+
+.footer-list {
+    padding-left: 0;
+    
+}
+
+.footer-media {
+    grid-area: 11 / 11 / 12 / 12;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.footer-media svg {
+    width: 20px;
+    height: 20px;
+    margin: 10px;
+}

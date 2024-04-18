@@ -1,0 +1,65 @@
+.custom-header {
+  position: sticky;
+  top: 0;
+  padding: 10px 0;
+  display: grid;
+  grid-template-columns: auto 1fr auto auto; /* Updated grid setup */
+  align-items: center;
+  gap: 20px;
+  width: 100%;
+  background-color: #0E223A;
+  height: 72px;
+}
+
+.logo {
+  margin-left: 20px;
+}
+
+/* This style ensures the nav links are centered in the header */
+.nav-links {
+  display: flex;
+  justify-content: center; /* Center nav-links horizontally */
+  flex-grow: 1; /* Allow nav-links to take up as much space as possible */
+}
+
+.nav-links ul {
+  display: flex;
+  gap: 20px;
+  list-style: none;
+  padding: 0;
+  margin: 0; /* Ensures the list is centered without extra margin */
+}
+
+.nav-links a {
+  color: white;
+  text-decoration: none;
+}
+
+.action-buttons {
+  display: flex;
+  justify-content: flex-end; /* Align action buttons to the right */
+  gap: 10px;
+  margin-right: 40px;
+}
+
+.signup-button, .login-button {
+  padding: 10px 15px;
+  cursor: pointer;
+  border-radius: 5px;
+  border: 2px solid transparent;
+}
+
+.signup-button {
+  background-color: white;
+  color: #112D4E;
+}
+
+.login-button {
+  background-color: #112D4E;
+  color: white;
+  border-color: white;
+}
+
+.action-buttons button:hover {
+  background-color: #3F72AF;
+}

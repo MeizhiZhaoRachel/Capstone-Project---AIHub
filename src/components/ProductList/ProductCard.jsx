@@ -84,3 +84,4 @@ function ProductCard({ product }) {
 }
 
 export default ProductCard;
+export const averageRating = ProductCard.averageRating;

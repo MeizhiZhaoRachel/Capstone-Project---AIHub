@@ -1,4 +1,3 @@
-// ProductCard.js
 import React, { useState, useEffect } from "react";
 import reviewContractABI from "../ProductList/reviewContractABI.json";
 import Web3 from "web3";

@@ -5,11 +5,13 @@ import { useProducts } from "./ProductsContext";
 import "../../style/ProductDetail/ProductDetail.css";
 import { useParams } from "react-router-dom";
 import DataAnalysis from "./DataAnalysis";
+import WriteReview from "../../components/ProductList/WriteReview";
+import { averageRating } from "../../components/ProductList/ProductCard";
 
 // Define the URL for the Infura provider
 const INFURA_URL =
   "https://sepolia.infura.io/v3/dee208015aa64ad7ac33bdc6c192bc4f";
-  // Smart contract address on the blockchain.
+// Smart contract address on the blockchain.
 const contractAddress = "0x296ffee7e9be5f2b57cc1ce417f1ac6030fbb45b";
 const web3 = new Web3(INFURA_URL);
 // Creates an instance of the smart contract.
@@ -34,21 +36,20 @@ function ProductDetail() {
   or when specified values change. */
   useEffect(() => {
     // Find the product details from the provided context
-    const currentProductDetails = products.find( 
+    const currentProductDetails = products.find(
       (product) => product.id.toString() === productId
     );
-    ;
-    setProductDetails(currentProductDetails); 
+    setProductDetails(currentProductDetails);
     // Fetch reviews from the blockchain
     const fetchReviewsFromBlockchain = async () => {
       try {
         const reviewsData = await reviewContract.methods
           .getReviewsByProductId(productId)
           .call();
-          const parsedReviewsData = reviewsData.map((review) => ({
-            ...review,
-            rating:parseInt(review.rating, 10),
-          }));
+        const parsedReviewsData = reviewsData.map((review) => ({
+          ...review,
+          rating: parseInt(review.rating, 10),
+        }));
         setReviews(parsedReviewsData);
       } catch (error) {
         console.error("Error fetching reviews from blockchain:", error);
@@ -56,7 +57,7 @@ function ProductDetail() {
     };
 
     // Ensure products are loaded from context before attempting to fetch details
-    if (productId && products.length > 0) { 
+    if (productId && products.length > 0) {
       fetchReviewsFromBlockchain();
     }
     /* The array [productId, products] at the end of the useEffect hook is known 
@@ -70,36 +71,62 @@ function ProductDetail() {
 
   return (
     <div className="product-detail-page">
-      <h1>{productDetails.name}</h1>
-      <p>{productDetails.description}</p>
       {productDetails.imageUrl && (
-        <img src={productDetails.imageUrl} alt={productDetails.name} />
+        <img
+          className="image"
+          src={productDetails.imageUrl}
+          alt={productDetails.name}
+        />
       )}
-      {DataAnalysis ? <DataAnalysis /> : 'No Data Analysis Yet'} 
-      <h2>Reviews</h2>
-      {reviews.length ? (
-        /* For each element (review), it also provides the position 
+      <div className="review-rating">
+        {[...Array(averageRating)].map((_, i) => (
+          <span key={i}>★</span>
+        ))}{" "}
+      </div>
+      <div class="review-summary">
+        {averageRating && <p>Rating: {averageRating} / 5</p>}{" "}
+      </div>
+
+      <div className="writeReview">
+        <p>
+          {" "}
+          ★ <br />
+          <br />
+          Help people looking for great <br /> products just like you!
+        </p>
+        <WriteReview />
+      </div>
+
+      <div className="dataAnalysis">
+        {" "}
+        {DataAnalysis ? <DataAnalysis /> : "No Data Analysis Yet"}{" "}
+      </div>
+
+      <h2 className="review-title">Attribute Reviews</h2>
+      <div className="reviews-container">
+        {reviews.length ? (
+          /* For each element (review), it also provides the position 
         of that element within the array (index). */
-        reviews.map((review, index) => (
-          /* React requires a key prop on elements in a list to create 
+          reviews.map((review, index) => (
+            /* React requires a key prop on elements in a list to create 
           a stable identity for each element */
-          <div key={index} className="review">
-            <div className="review-rating">
-              {/* Display a star for each rating point */}
-              {/* it expands the elements of the array into individual elements */}
-              {/* _ represents the current element of the array during each iteration */}
-              {[...Array(review.rating)].map((_, i) => (
-                <span key={i}>★</span>
-              ))}
+            <div key={index} className="review">
+              <div className="review-rating">
+                {/* Display a star for each rating point */}
+                {/* it expands the elements of the array into individual elements */}
+                {/* _ represents the current element of the array during each iteration */}
+                {[...Array(review.rating)].map((_, i) => (
+                  <span key={i}>★</span>
+                ))}
+              </div>
+              <p>Content: {review.content}</p>
             </div>
-            <p>Content: {review.content}</p>
-            
-          </div>
-        ))
-      ) : (
-        <p>No reviews yet.</p>
-      )}
-    </div>
+          ))
+        ) : (
+          <p>No reviews yet.</p>
+        )}
+      </div>
+      </div>
   );
 }
 

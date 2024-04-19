@@ -25,7 +25,7 @@ function ProductDetail() {
   // State hooks for storing product details and reviews.
   const [productDetails, setProductDetails] = useState(null);
   const [reviews, setReviews] = useState([]);
-  // <Route path="/product/:productId" element={<ProductDetail />} />
+  // <Route path="/product/:productId" element={<ProductDetail />} /> 
   // Extracts productId from the URL.
   /* If a user visits http://yourwebsite.com/product/12345, 
     the productId extracted by useParams() would be the string "12345".*/
@@ -91,11 +91,11 @@ function ProductDetail() {
           alt={productDetails.name}
         />
       )}
-      <span className="stars">
+      <span className="star1">
         {" "}
         <StarRating averageRating={averageRating} />
       </span>
-      <div class="review-summary">
+      <div className="review-summary">
         {averageRating && (
           <p>
             {" "}
@@ -130,10 +130,10 @@ function ProductDetail() {
             /* React requires a key prop on elements in a list to create 
           a stable identity for each element */
             <div key={index} className="review">
-              <div className="review-rating">
+              <div>
                 <StarRating averageRating={review.rating} />
               </div>
-              <p>Content: {review.content}</p>
+              <p>{review.content}</p>
             </div>
           ))
         ) : (

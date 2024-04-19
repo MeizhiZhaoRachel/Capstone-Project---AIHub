@@ -5,7 +5,7 @@ function StarRating({ averageRating }) {
   const partialStar = averageRating % 1; // Fractional part of the rating
 
   return (
-    <div className="stars">
+    <div>
       {[...Array(fullStars)].map((_, i) => (
         <span key={i} style={{ color: 'orange' }}>★</span>
       ))}

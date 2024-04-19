@@ -5,7 +5,7 @@ import "../style/Header.css";
 function Header() {
   return (
     <header className="custom-header">
-      <div class="container">
+      <div className="container">
       <div className="logo">
           logo
           </div>

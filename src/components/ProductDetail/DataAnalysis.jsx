@@ -14,7 +14,6 @@ import {
 import { Bar, Pie } from "react-chartjs-2";
 import "../../style/ProductDetail/DataAnalysis.css";
 
-
 // Register necessary Chart.js components
 Chart.register(
   CategoryScale,
@@ -62,16 +61,16 @@ function DataAnalysis() {
       }
     };
     fetchReviewsFromBlockchain();
-  }, [productId]);
+  }, [productId, reviews]);
 
   const analyzeData = (reviews) => {
-    const counts = [1, 2, 3, 4, 5].map(
+    const counts = [5, 4, 3, 2, 1].map(
       (rating) =>
         reviews.filter(
           (review) => review.rating === rating && review.productId === productId
         ).length
     );
-    setRatingCounts(counts);
+    setRatingCounts(counts.reverse());
   };
 
   const analyzeVocations = (reviewsData) => {
@@ -99,47 +98,117 @@ function DataAnalysis() {
   };
 
   const data = {
-    labels: ["1 Star", "2 Stars", "3 Stars", "4 Stars", "5 Stars"],
+    labels: ["5 Stars", "4 Stars", "3 Stars", "2 Stars", "1 Star"],
     datasets: [
       {
         label: "Rating Distribution",
-        data: ratingCounts,
-        backgroundColor: [
-          "rgba(255, 99, 132, 0.6)",
-          "rgba(54, 162, 235, 0.6)",
-          "rgba(255, 206, 86, 0.6)",
-          "rgba(75, 192, 192, 0.6)",
-          "rgba(153, 102, 255, 0.6)",
-        ],
-        borderColor: [
-          "rgba(255, 99, 132, 1)",
-          "rgba(54, 162, 235, 1)",
-          "rgba(255, 206, 86, 1)",
-          "rgba(75, 192, 192, 1)",
-          "rgba(153, 102, 255, 1)",
-        ],
+        data: ratingCounts.reverse(),
+        backgroundColor: "rgba(255, 213, 150, 0.6)", // Uniform color for all bars
+        // [
+        //   "rgba(255, 99, 132, 0.6)",
+        //   "rgba(54, 162, 235, 0.6)",
+        //   "rgba(255, 206, 86, 0.6)",
+        //   "rgba(75, 192, 192, 0.6)",
+        //   "rgba(153, 102, 255, 0.6)",
+        // ],
+        // borderColor: [
+        //   "rgba(255, 99, 132, 1)",
+        //   "rgba(54, 162, 235, 1)",
+        //   "rgba(255, 206, 86, 1)",
+        //   "rgba(75, 192, 192, 1)",
+        //   "rgba(153, 102, 255, 1)",
+        // ],
+        borderColor: "rgba(255, 213, 150, 1)",
         borderWidth: 1,
       },
     ],
   };
 
   const optionsBar = {
+    //   indexAxis: "y", // To make the bars horizontal
+    //   scales: {
+    //     x: {
+    //       grid: {
+    //         display: false, // This will remove the grid lines
+    //       },
+    //       ticks: {
+    //         display: false, // This will remove the x-axis labels
+    //       },
+    //     },
+    //     y: {
+    //       beginAtZero: true,
+    //       grid: {
+    //         display: false, // This will remove the grid lines
+    //       },
+    //     },
+    //   },
+    //   responsive: true,
+    //   maintainAspectRatio: false,
+    //   plugins: {
+    //     legend: {
+    //       display: true, // You can set this to false if you want to remove the legend
+    //     },
+    //   },
+    indexAxis: "y", // To make the bars horizontal
     scales: {
-      x: { type: "category" },
-      y: { beginAtZero: true },
+      x: {
+        grid: {
+          display: false, // This will remove the grid lines
+        },
+        ticks: {
+          display: false, // This will remove the x-axis labels
+        },
+      },
+      y: {
+        beginAtZero: true,
+        grid: {
+          display: false, // This will remove the grid lines
+        },
+      },
     },
     responsive: true,
     maintainAspectRatio: false,
+    plugins: {
+      legend: {
+        display: false, // Set to false to hide the legend
+      },
+      datalabels: {
+        display: true,
+        color: "#000000",
+        anchor: "end",
+        align: "top",
+        formatter: (value, context) => {
+          let sum = 0;
+          let dataArr = context.chart.data.datasets[0].data;
+          dataArr.map((data) => {
+            sum += data;
+          });
+          let percentage = ((value * 100) / sum).toFixed(1) + "%";
+          return percentage;
+        },
+      },
+    },
   };
 
   return (
-    <div  className="chart-container">
-      <h1>Data Analysis</h1>
-      <Bar data={data} options={optionsBar} />
-      <Pie
-        data={vocationData}
-        options={{ responsive: true, maintainAspectRatio: false }}
-      />
+    <div className="chart-container">
+      <h1 className="dataAnalysisTitle">Data Analysis</h1>
+      <div className="bar-container">
+        <div className="bar-left">
+          <Bar
+            data={data}
+            options={optionsBar}
+            style={{ maxWidth: "300px", maxHeight: "200px" }}
+          />
+        </div>
+        <div className="bar-right">
+          <Pie
+            data={vocationData}
+            options={{ responsive: true, maintainAspectRatio: false }}
+            style={{ maxWidth: "300px", maxHeight: "200px" }}
+          />
+        </div>
+      </div>
     </div>
   );
 }

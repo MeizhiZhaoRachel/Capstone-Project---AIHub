@@ -1,32 +1,29 @@
 .chart-container {
-  display: flex; /* Enable flexbox layout */
-  flex-direction: column; /* Stack children vertically */
-  align-items: center; /* Center children horizontally */
-  max-width: 600px; /* Set maximum width of the container */
-  margin: auto; /* Center the container on the page */
-}
-
-.dataAnalysisTitle {
-  width: 100%; /* Make the title full width */
-  text-align: left; /* Center the title text */
-  margin-bottom: 20px; /* Space below the title */
-  font-size: 30px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: 600px;
+  margin: auto;
 }
 
 .bar-container {
-  display: flex; /* Enable flex layout for children */
-  flex-direction: row; /* Lay out children in a row */
-  justify-content: space-around; /* Distribute space between children */
-  align-items: flex-start; /* Align children to the start of the cross axis */
-  width: 100%; /* Take up full width of the parent */
-  gap: 20px; /* Space between the two chart containers */
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: flex-start;
+  width: 100%;
+  gap: 20px;
 }
 
-.bar-left,
-.bar-right {
-  flex-basis: calc(50% - 10px); /* Allocate 50% width minus half of gap */
-  display: flex; /* Enable flex layout within each column */
-  justify-content: center; /* Center the charts horizontally */
-  align-items: center; /* Center the charts vertically */
+.chart-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex-basis: calc(50% - 10px);
 }
 
+.barName {
+  font-size: 15px; /* Adjust the font size to match your design */
+  text-align: left;
+  margin-bottom: 10px; /* Add some space below the title */
+}

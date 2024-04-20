@@ -125,30 +125,6 @@ function DataAnalysis() {
   };
 
   const optionsBar = {
-    //   indexAxis: "y", // To make the bars horizontal
-    //   scales: {
-    //     x: {
-    //       grid: {
-    //         display: false, // This will remove the grid lines
-    //       },
-    //       ticks: {
-    //         display: false, // This will remove the x-axis labels
-    //       },
-    //     },
-    //     y: {
-    //       beginAtZero: true,
-    //       grid: {
-    //         display: false, // This will remove the grid lines
-    //       },
-    //     },
-    //   },
-    //   responsive: true,
-    //   maintainAspectRatio: false,
-    //   plugins: {
-    //     legend: {
-    //       display: true, // You can set this to false if you want to remove the legend
-    //     },
-    //   },
     indexAxis: "y", // To make the bars horizontal
     scales: {
       x: {
@@ -192,16 +168,17 @@ function DataAnalysis() {
 
   return (
     <div className="chart-container">
-      <h1 className="dataAnalysisTitle">Data Analysis</h1>
       <div className="bar-container">
-        <div className="bar-left">
+        <div className="bar-section">
+          <div className="barName">Review Scores</div>
           <Bar
             data={data}
             options={optionsBar}
             style={{ maxWidth: "300px", maxHeight: "200px" }}
           />
         </div>
-        <div className="bar-right">
+        <div className="bar-section">
+          <div className="barName">Reviewer Sentiment</div>
           <Pie
             data={vocationData}
             options={{ responsive: true, maintainAspectRatio: false }}

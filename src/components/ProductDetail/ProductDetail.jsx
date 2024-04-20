@@ -25,7 +25,7 @@ function ProductDetail() {
   // State hooks for storing product details and reviews.
   const [productDetails, setProductDetails] = useState(null);
   const [reviews, setReviews] = useState([]);
-  // <Route path="/product/:productId" element={<ProductDetail />} /> 
+  // <Route path="/product/:productId" element={<ProductDetail />} />
   // Extracts productId from the URL.
   /* If a user visits http://yourwebsite.com/product/12345, 
     the productId extracted by useParams() would be the string "12345".*/
@@ -84,25 +84,28 @@ function ProductDetail() {
 
   return (
     <div className="product-detail-page">
-      {productDetails.imageUrl && (
-        <img
-          className="image"
-          src={productDetails.imageUrl}
-          alt={productDetails.name}
-        />
-      )}
-      <span className="star1">
-        {" "}
-        <StarRating averageRating={averageRating} />
-      </span>
-      <div className="review-summary">
-        {averageRating && (
-          <p>
-            {" "}
-            <span className="scoreBlue">Score: </span>
-            {averageRating} out of 5
-          </p>
-        )}{" "}
+      <div className="top-left-container">
+        {productDetails.imageUrl && (
+          <img
+            className="image"
+            src={productDetails.imageUrl}
+            alt={productDetails.name}
+          />
+        )}
+        <span className="star-1">
+          {" "}
+          <StarRating averageRating={averageRating} />
+        </span>
+
+        <div className="review-summary">
+          {averageRating && (
+            <p>
+              {" "}
+              <span className="scoreBlue">Score: </span>
+              {averageRating} out of 5
+            </p>
+          )}{" "}
+        </div>
       </div>
 
       <div className="writeReview-container">
@@ -115,14 +118,20 @@ function ProductDetail() {
         <WriteReview />
       </div>
 
-      <div className="dataAnalysis">
+      <div className="productionInformation-container">
+        <div className="productName">What is {productDetails.name}</div>
+        <p class="productDescription">
+          <br /> {productDetails.description}
+        </p>
+      </div>
+
+      <div className="dataAnalysis-container">
         {" "}
         {DataAnalysis ? <DataAnalysis /> : "No Data Analysis Yet"}{" "}
       </div>
 
-      
       <div className="reviews-container">
-      <h2 className="review-title">Attribute Reviews</h2>
+        <h2 className="review-title">Attribute Ratings</h2>
         {reviews.length ? (
           /* For each element (review), it also provides the position 
         of that element within the array (index). */

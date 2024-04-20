@@ -1,0 +1,114 @@
+/* Assuming .main-content is removed or its display:flex; is commented out for debugging */
+.product-list-page {
+    display: grid;
+    max-width: 1200px;
+    margin: 0 auto;
+    grid-template-columns: 1fr;
+    /* 如果您想让页面居中，您可以保留这个设置 */
+    grid-template-rows: auto 1fr;
+    /* 可以帮助您的头部和主体内容分开 */
+    gap: 0;
+}
+
+.product-list-header {
+    grid-column: 1 / -1;
+    text-align: left;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    font-size: calc(1.375rem + 1.5vw);
+    width: 100%;
+}
+
+.product-list-header h1 {
+    font-size: calc(1.2rem + 1.5vw);
+    /* 响应式字体大小 */
+    font-weight: 800;
+    text-align: left;
+    margin-top: 60px;
+    margin-bottom: 1rem;
+    letter-spacing: 0.02em;
+}
+
+.product-list-header hr {
+    width: 100%;
+    border: 0;
+    height: 1px;
+    background-color: #ccc;
+    margin: 0;
+}
+
+.main-content {
+    display: grid;
+    width: 100%;
+    /* Ensures it stretches to the max-width */
+    max-width: 1200px;
+    /* Maximum width of the content */
+    grid-template-columns: 300px 900px;
+    /* Directly setting the widths for sidebar and main content */
+    gap: 40px;
+    margin-top: 2rem;
+}
+
+/* Ensure these are direct children of .product-list-page for this layout to apply */
+.sidebar {
+    width: 100%;
+    padding: 0;
+    /* 如果侧边栏有内边距，移除它 */
+}
+
+.write-review-container hr {
+    margin: 0 auto;
+    border-top: 1px solid #e0e0e0;
+    /* 可自定义颜色和样式 */
+    box-sizing: border-box;
+    /* 确保边框不会影响到总宽度 */
+}
+
+.write-review-container {
+    width: 100%;
+    /* 让容器占满全部可用宽度 */
+    box-sizing: border-box;
+    margin: 0px;
+    padding: 0px;
+}
+
+.promise-container {
+    padding-top: 0px;
+    padding-left: 20px;
+    padding-right: 10px;
+    margin-top: 20px;
+    /* Add some space above the container */
+    font-family: Arial, sans-serif;
+    /* Font family */
+    color: #333;
+    /* Dark grey text color */
+    line-height: 24px;
+    /* Spacing between lines of text */
+}
+
+.promise-container h2 {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 1.2rem;
+}
+
+.promise-container p {
+    font-family: Arial, Helvetica, sans-serif;
+    padding-top: 20px;
+    font-size: .9rem;
+}
+
+.promise-img {
+    background-image: url('../../../public/img/promise.png');
+    width: 11%;
+    /* 或您想要的宽度 */
+    height: 0;
+    padding-top: 25%;
+    /* 高度占宽度的百分比，根据图片的宽高比调整 */
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.product-list {
+    margin-bottom: 2rem;
+}

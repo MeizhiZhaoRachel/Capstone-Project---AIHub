@@ -18,6 +18,7 @@ const reviewContract = new web3.eth.Contract(
 
 function WriteReview() {
   const [showReviewForm, setShowReviewForm] = useState(false);
+  const [showIntro, setShowIntro] = useState(true)
   const { currentUser } = useAuth();
   const [review, setReview] = useState({
     productId: "",
@@ -146,18 +147,35 @@ function WriteReview() {
 
   return (
     <div className="write-review-container">
-      <button
-        onClick={() => setShowReviewForm(!showReviewForm)}
-        className="write-review-button"
-      >
-        Write a review
-      </button>
-      {showReviewForm && !currentUser && (    <div>
+      {showIntro && (
+        <div className="write-review">
+          <div className="reviews-img"></div>
+            <p>Help people looking for great
+              <br/>products just like you!</p>
+            <button
+              onClick={() => {setShowReviewForm(!showReviewForm); setShowIntro(!showIntro)}}
+              className="write-review-button"
+            >
+              Write a review
+            </button>     
+        </div>
+          )}
+
+      {showReviewForm && !currentUser && (    
+      <div className="login-prompt">
+        <div className="reviews-img"></div>
+        <p>
         Please <Link to="/signin">login in</Link> or <Link to="/signup">sign up</Link> to write a review.
-      </div>)}
+        </p>
+      </div>
+      )
+      }
       {showReviewForm && currentUser && (
-        <div className="review-form-container">
-          {/* <h2>Write a review</h2> */}
+        <div className="review-form">
+          <div className="review-header">
+            <div className="pen-img"></div>
+            <h2>Write A Review</h2>
+          </div>
           <form onSubmit={handleFormSubmit}>
             <select
               name="productId"
@@ -170,25 +188,31 @@ function WriteReview() {
                 </option>
               ))}
             </select>
-            <div className="star-rating">
-            {/* Each button represents a star for the rating. The key is index because it's unique for each element in the map.*/}
-              {[...Array(5)].map((_, index) => (
-                <button
-                  key={index}
-                  type="button"
-                  className={`star-button ${review.rating > index ? "selected" : ""}`}
-                  onClick={() => setReview((prevState) => ({ ...prevState, rating: index + 1 }))}
-                >
-                  ★
-                </button>
-              ))}
+            <div className="rate">
+              <p>Rate your experience</p>
+              <div className="star-rating">
+              {/* Each button represents a star for the rating. The key is index because it's unique for each element in the map...*/}
+                {[...Array(5)].map((_, index) => (
+                  <button
+                    key={index}
+                    type="button"
+                    className={`star-button ${review.rating > index ? "selected" : ""}`}
+                    onClick={() => setReview((prevState) => ({ ...prevState, rating: index + 1 }))}
+                  >
+                    ★
+                  </button>
+                ))}
+              </div>
             </div>
-            <textarea
-              name="content"
-              placeholder="Share your experience"
-              onChange={handleInputChange}
-              value={review.content}
-            ></textarea>
+            <div className="text-content">
+              <p>The feeling of experience</p>
+              <textarea
+                name="content"
+                placeholder="Share your experience"
+                onChange={handleInputChange}
+                value={review.content}
+              ></textarea>
+            </div>
             <button type="submit" className="submit-review-button">
               Submit
             </button>

@@ -109,12 +109,7 @@ function ProductDetail() {
       </div>
 
       <div className="writeReview-container">
-        <p>
-          {" "}
-          ★ <br />
-          <br />
-          Help people looking for great <br /> products just like you!
-        </p>
+
         <WriteReview />
       </div>
 
@@ -131,7 +126,7 @@ function ProductDetail() {
       </div>
 
       <div className="reviews-container">
-        <h2 className="review-title">Attribute Ratings</h2>
+        <h2 className="review-title">Attribute Reviews</h2>
         {reviews.length ? (
           /* For each element (review), it also provides the position 
         of that element within the array (index). */

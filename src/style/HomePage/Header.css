@@ -1,43 +1,80 @@
 .custom-header {
-  position: sticky;
-  top: 0;
-  padding: 10px 0;
-  display: grid;
-  grid-template-columns: auto 1fr auto auto; /* Updated grid setup */
-  align-items: center;
-  gap: 20px;
-  width: 100%;
-  background-color: #0E223A;
-  height: 72px;
+  background-color: #0E223A; 
+  color: #ffffff; 
+  height: 90px; 
+  display: flex; 
+  align-items: center; 
+  justify-content: center; 
+  padding: 0; 
+  margin: auto; 
+  max-width: 100%;
 }
 
-.logo {
-  margin-left: 20px;
+.header-content{
+  display: flex; 
+  justify-content: space-between; 
+  align-items: center; 
+  max-width: 1200px; 
+  width: 100%; 
 }
 
-/* This style ensures the nav links are centered in the header */
-.nav-links {
+.header-left{
+  display: flex; 
+  align-items: center; 
+}
+
+.header-left .logo-img {
+  background: url('../../../public/img/logo-white.png') no-repeat center;
+  background-size: contain;
+  width: 43px; 
+  height: 40px; 
+  margin-right: 1rem; 
+}
+
+.header-left p{
+  font-family:'Times New Roman', Times, serif;
+  font-size: 2rem;
+  margin: 1rem 0 ;
+  font-weight: 800;
+  color: #fff;
+}
+
+.header-right {
+  display: flex; 
+  align-items: center; 
+  flex: 1; 
+  justify-content: flex-end; 
+}
+
+.nav-links,
+.action-buttons {
   display: flex;
-  justify-content: center; /* Center nav-links horizontally */
-  flex-grow: 1; /* Allow nav-links to take up as much space as possible */
+  align-items: center;
+  gap: 1rem; 
 }
+
 
 .nav-links ul {
-  display: flex;
-  gap: 20px;
   list-style: none;
   padding: 0;
-  margin: 0; /* Ensures the list is centered without extra margin */
+  margin: 0 1.6rem;
+  display: flex;
+  gap: 1rem; 
 }
 
 .nav-links a {
-  color: white;
+  color: #ffffff; 
   text-decoration: none;
 }
 
+.nav-links li {
+  padding: 0.5rem 0; 
+}
+
+
 .action-buttons {
   display: flex;
-  justify-content: flex-end; /* Align action buttons to the right */
+  justify-content: flex-end; 
   gap: 10px;
   margin-right: 40px;
 }

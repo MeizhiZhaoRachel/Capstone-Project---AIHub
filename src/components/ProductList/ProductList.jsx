@@ -36,19 +36,35 @@ function ProductList() {
 
   return (
     <div className="product-list-page">
-      <WriteReview />
-      <div className="product-list">
-      {/* Check if there are any products in the filteredProducts array */}
-        {filteredProducts.length > 0 ? (
-          filteredProducts.map((product) => (
-            // The key prop is essential for React's reconciliation process to 
-            // identify elements uniquely. The product object is passed as a prop 
-            // to ProductCard, which it uses to populate its UI.
-            <ProductCard key={product.id} product={product} />
-          ))
-        ) : (
-          <p>Sorry, no matching product.</p>
-        )}
+      <header className="product-list-header">
+        <h1>AI Services</h1>
+        <hr />
+      </header>
+      <div className="main-content">
+        <aside className="sidebar">
+            <div className="write-review-container">
+            <WriteReview />
+            </div>
+            <hr/>
+            <div className="promise-container">
+              <div className="promise-img"></div>
+              <h2>Our promise to you</h2>
+              <p>The list of products below is based purely on reviews and profile completeness. There is no paid placement and analyst opinions do not influence their rankings. We are committed to ensuring information on our site is reliable, useful, and worthy of your trust..</p>
+            </div>
+          </aside>
+        <div className="product-list">
+        {/* Check if there are any products in the filteredProducts array */}
+          {filteredProducts.length > 0 ? (
+            filteredProducts.map((product) => (
+              // The key prop is essential for React's reconciliation process to 
+              // identify elements uniquely. The product object is passed as a prop 
+              // to ProductCard, which it uses to populate its UI.
+              <ProductCard key={product.id} product={product} />
+            ))
+          ) : (
+            <p>Sorry, no matching product.</p>
+          )}
+        </div>
       </div>
     </div>
   );

@@ -43,9 +43,9 @@ const pool = new Pool({
             const insertRes = await client.query(`
                 INSERT INTO products (name, imageurl, description)
                 VALUES 
-                ('ChatGPT', 'chatgpt.jpg', 'ChatGPT Image'),
-                ('Gemini', 'gemini.jpg', 'Gemini Image'),
-                ('WenXinYiYan', 'wenxinyiyan.jpg', 'WenXinYiYan Image');
+                ('ChatGPT', 'chatgpt.jpg', 'ChatGPT is an advanced language model developed by OpenAI, designed to understand and generate human-like text. This conversational AI is based on the GPT (Generative Pretrained Transformer) architecture, which enables it to participate in discussions, answer questions, and create content that ranges from writing essays to composing poetry. '),
+                ('Gemini', 'gemini.jpg', 'Gemini is a cryptocurrency exchange and custodian that allows customers to buy, sell, and store digital assets. Founded by the Winklevoss twins in 2014, Gemini is known for its user-friendly interface and a strong commitment to compliance and security. '),
+                ('WenXinYiYan', 'wenxinyiyan.jpg', 'WenXin YiYan, often translated as "Warm Heart and Articulate Speech," is a technology platform that specializes in natural language processing and understanding. It harnesses artificial intelligence to interpret, generate, and translate human language with high accuracy and cultural sensitivity. ')
             `);
             console.log(`Inserted ${insertRes.rowCount} rows.`);
         } else {

@@ -1,11 +1,229 @@
+.write-review {
+  background-color: #F6F7FE;
+  border-radius: 8px;
+  padding: 20px;
+  margin: 0px;
+  text-align: left;
+}
+
+.write-review p {
+  padding-top: 10px;
+  font-family: Arial, Helvetica, sans-serif;
+  font-weight: 700;
+  font-size: 1.01rem;
+  color: #3F72AF;
+  line-height: 32px;
+}
+
+.write-review-container {
+  text-align: center;
+  margin-top: 0px;
+  margin-bottom: 40px;
+}
+
+.write-review-button {
+  background-color: #fff;
+  color: #3F72AF;
+  border: 1px solid #ddd;
+  font-family: Arial, Helvetica, sans-serif;
+  font-weight: bold;
+  font-size: .9rem;
+  border-radius: 24px;
+  padding: 10px 30px;
+  cursor: pointer;
+}
+
+.reviews-img {
+  background-image: url('../../../public/img/review.png');
+  width: 11%;
+  height: 0;
+  padding-top: 12%;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+
+}
+
+.write-review-button:hover {
+  background-color: #003d82;
+  color: #fff;
+}
+
+.login-prompt {
+  background-color: #F6F7FE;
+  border-radius: 8px;
+  padding: 20px;
+  margin: 0px;
+  text-align: left;
+}
+
+.login-prompt p {
+  padding-top: 10px;
+  font-family: Arial, Helvetica, sans-serif;
+  font-weight: 700;
+  font-size: 1.01rem;
+  color: #3F72AF;
+  line-height: 32px;
+}
+
+.review-form {
+  background: #F6F7FE;
+  padding: 1.3rem 2.2rem;
+  border-radius: 6px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  margin-bottom: 2rem;
+  font-family: 'Arial', sans-serif;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.review-header {
+  display: flex;
+  width: 90%;
+  justify-content: center;
+  padding-top: .5rem;
+  margin-bottom: 0.6rem;
+}
+
+.review-form h2 {
+  color: #000000;
+  margin-bottom: 1.6rem;
+  font-weight: 700;
+  font-size: 1.1rem;
+  margin-left: 12px;
+
+}
+
+.pen-img {
+  background-image: url('../../../public/img/pen.png');
+  width: 8%;
+  height: 0;
+  padding-top: 8%;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.review-form form {
+  display: flex;
+  flex-direction: column;
+}
+
+.review-form select {
+  height: 2.2rem;
+  padding: 0.2rem 1.2rem;
+  margin-bottom: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  background: #f8f8f8;
+  font-size: .9rem;
+  letter-spacing: 0.05em;
+  color: #7C84A0;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  background-image: url('data:image/svg+xml;utf8,<svg width="12" height="12" viewBox="0 0 12 12" xmlns="http://www.w3.org/2000/svg"><polygon points="6,9 2,3 10,3" fill="%237C84A0" /></svg>');
+  background-repeat: no-repeat;
+  background-position: right 0.8rem center;
+  background-size: 12px 12px;
+  padding-right: 2rem;
+}
+
+.rate p {
+  font-size: .9rem;
+  text-align: left;
+  margin-top: .7rem;
+  letter-spacing: 0.1em;
+  margin-bottom: 0;
+  color: #343847;
+}
+
+.star-rating {
+  display: flex;
+  justify-content: flex-start;
+  margin-bottom: .8rem;
+}
+
 .star-button {
-    background-color: transparent; /* No background */
-    border: none; /* No border */
-    cursor: pointer; /* Changes cursor to pointer to indicate it's clickable */
-    color: grey; /* Default star color */
-  }
-  
-  /* This CSS will apply to the stars that have been selected (clicked) */
-  .star-button.selected {
-    color: orange; /* Changes color to yellow */
-  }
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 1.6rem;
+  padding-left: 0px;
+  color: #ccc;
+  margin-right: .05rem;
+}
+
+.star-button.selected {
+  color: #ffc107;
+}
+
+.star-button:hover {
+  color: #ffeb3b;
+}
+
+.text-content {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+
+}
+
+.text-content p {
+  font-size: .9rem;
+  text-align: left;
+  margin-top: .7rem;
+  letter-spacing: 0.1em;
+  margin-bottom: 10px;
+  color: #343847;
+}
+
+.review-form textarea {
+  padding: .8rem 1.2rem;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  height: 8rem;
+  margin-bottom: 2rem;
+  resize: vertical;
+  background: #f8f8f8;
+  width: 100%;
+}
+
+.review-form textarea::placeholder {
+  color: #c4c4c4;
+  font-size: 0.75rem;
+  opacity: 1;
+  line-height: 1.5rem;
+  letter-spacing: 0.1em;
+}
+
+.submit-review-button {
+  padding: 0.7rem 0.5rem;
+  margin-bottom: 1rem;
+  width: 50%;
+  height: 2rem;
+  font-size: 1rem;
+  max-width: 150px;
+  min-height: 20px;
+  background-color: #007bff;
+  /* Bootstrap primary blue */
+  color: white;
+  border: none;
+  border-radius: 30px;
+  cursor: pointer;
+  font-size: 0.8rem;
+  transition: background-color 0.3s ease;
+  /* Smooth transition for hover effect */
+  display: flex;
+  /* Makes the button itself a flex container */
+  justify-content: center;
+  /* Center any content inside the button horizontally */
+  align-items: center;
+  align-self: center;
+
+}
+
+.submit-review-button:hover {
+  background-color: #003d82;
+}

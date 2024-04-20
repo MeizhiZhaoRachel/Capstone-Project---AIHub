@@ -70,16 +70,22 @@ function ProductCard({ product }) {
     // Wrap the card in a Link component to make it clickable
     <Link to={`/product/${product.id}`} className="product-card-link">
       <div className="product-card">
-        <img
-          src={product.imageUrl}
-          alt={product.name}
-          className="product-image"
-        />
         <div className="product-info">
-          <h3>{product.name}</h3>
+          <img
+            src={product.imageUrl}
+            alt={product.name}
+            className="product-image"
+          />
+          <div className="product-details">
+            <h3>{product.name}</h3>
+            <div className="ave-rating">
+              <StarRating averageRating={averageRating} />
+              {averageRating && <p>Rating:   {averageRating} / 5</p>}
+            </div>
+          </div>
+        </div>
+        <div className="product-desc">
           <p>{product.description}</p>
-          <StarRating averageRating={averageRating} />
-          {averageRating && <p>Rating: {averageRating} / 5</p>}
         </div>
       </div>
     </Link>

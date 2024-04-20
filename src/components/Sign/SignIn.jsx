@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useAuth } from './AuthContext'; 
 import { useNavigate } from 'react-router-dom'; 
-
+import '../../style/Sign/SignIn.css';
 
 function SignIn() {
   const [formData, setFormData] = useState({ email: '', password: '' });
@@ -29,38 +29,41 @@ function SignIn() {
   };
 
   return (
-    <div>
-      
-      <h1>Sign In</h1>
-      <form onSubmit={handleSubmit}>
-        <div>
-          <label htmlFor="email">Email:</label>
-          {/* setFormData({ ...formData, [e.target.name]: e.target.value }); 
-          [e.target.name] here could be "email" and e.target.value could be formData.email*/}
-          <input
-            type="email"
-            id="email"
-            name="email"
-            value={formData.email}
-            onChange={handleChange}
-            required
-          />
-        </div>
-        <div>
-          <label htmlFor="password">Password:</label>
-          {/* setFormData({ ...formData, [e.target.name]: e.target.value }); 
-          [e.target.name] here could be "password" and e.target.value could be formData.password */}
-          <input
-            type="password"
-            id="password"
-            name="password"
-            value={formData.password}
-            onChange={handleChange}
-            required
-          />
-        </div>
-        <button type="submit">Sign In</button>
-      </form>
+    <div className='signin-wrapper'>
+      <div className='signin-container'>
+        <h1>Sign In to AIHub</h1>
+        <form onSubmit={handleSubmit}>
+          <div className='signin-email'>
+            <label htmlFor="email" >Email:</label>
+            {/* setFormData({ ...formData, [e.target.name]: e.target.value }); 
+            [e.target.name] here could be "email" and e.target.value could be formData.email*/}
+            <input
+              type="email"
+              id="email"
+              name="email"
+              value={formData.email}
+              onChange={handleChange}
+              required
+            />
+          </div>
+          <div className='signin-password'>
+            <label htmlFor="password" >Password:</label>
+            {/* setFormData({ ...formData, [e.target.name]: e.target.value }); 
+            [e.target.name] here could be "password" and e.target.value could be formData.password */}
+            <input
+              type="password"
+              id="password"
+              name="password"
+              value={formData.password}
+              onChange={handleChange}
+              required
+            />
+          </div>
+          <div className='signin-button'>
+            <button type="submit" >Sign In</button>
+          </div>
+        </form>
+      </div>
     </div>
   );
   

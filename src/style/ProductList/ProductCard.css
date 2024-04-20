@@ -1,0 +1,117 @@
+.product-card-link {
+    text-decoration: none;
+    color: inherit;
+    max-width: 1160px;
+}
+
+.product-card {
+    display: flex;
+    flex-direction: column;
+    width: 95%;
+    border: 1px solid #f1f1f1;
+    border-radius: 4px;
+    box-shadow: 0 2px 4px rgba(241, 240, 240, 0.2);
+    background-color: #ffffff;
+    transition: box-shadow 0.3s ease-in-out;
+    padding: 3rem 5rem;
+    margin-bottom: 1rem;
+    overflow: hidden;
+}
+
+.product-card:hover {
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+.product-info {
+    display: flex;
+    text-align: left;
+    padding: 0;
+    margin-bottom: 2rem;
+}
+
+.product-image {
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+    border-bottom-left-radius: 20px;
+    margin-left: 0rem;
+    margin-right: 2rem;
+}
+
+.product-card-image img {
+    width: 100%;
+    height: 100%;
+    display: block;
+    object-fit: cover;
+    margin: 0rem;
+}
+
+.product-info h3 {
+    margin: 0;
+    color: #333333;
+    font-size: 1.25rem;
+    font-weight: 600;
+}
+
+.product-info p {
+    color: #666666;
+    font-size: 0.875rem;
+    line-height: 1.5;
+    margin: 8px 0;
+}
+
+.product-details {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    padding-top: .9rem;
+}
+
+.product-details h3 {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 1.5rem;
+    letter-spacing: 0.02em;
+}
+
+.ave-rating {
+    display: flex;
+    /* Align children inline */
+    align-items: center;
+    /* Vertical alignment to the center */
+    gap: 10px;
+    /* Optional: adds some space between the star rating and the text */
+}
+
+.rating {
+    display: flex;
+    align-items: center;
+}
+
+.rating p {
+    margin-left: 8px;
+}
+
+.star-rating {
+    display: inline-block;
+}
+
+.star {
+    color: #ffc107;
+    margin-right: 4px;
+}
+
+.product-desc p {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: .87rem;
+    margin-bottom: 0;
+    color: #979797;
+    line-height: 1.2rem;
+    letter-spacing: 0.02em;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}

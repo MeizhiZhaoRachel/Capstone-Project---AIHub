@@ -32,10 +32,10 @@ function Reviews() {
           }));
           const filteredReviews = parsedReviewsData
             .filter((review) => review.rating === 5)
-            .slice(0, 9);
+            ;
           allReviews = allReviews.concat(filteredReviews);
         }
-        setReviews(allReviews);
+        setReviews(allReviews.slice(0, 9));
       } catch (error) {
         console.error("Error fetching reviews from blockchain:", error);
       }
@@ -46,10 +46,12 @@ function Reviews() {
 
   return (
     <div className="reviews-container">
-      <div className="reviews-headline">Browse reviews</div>
+      <div className="reviews-headline">Reviews</div>
       {reviews.length > 0 ? (
         reviews.map((review, index) => (
-          <div key={index} className="review">
+          // <div className={`review review${index + 1}`} key={index}>
+          // <div className="review" style={{ gridArea: `review${index + 1}` }} key={index}>
+          <div className={`review review${index + 1}`} key={index}>
             <div className="review-rating">
               {/* Display a star for each rating point */}
               {/* it expands the elements of the array into individual elements */}
@@ -60,7 +62,7 @@ function Reviews() {
             </div>
             <div className="review-info">
               <span className="reviewer-name">{review.userIdOrEmail} </span>
-              reviewed <span className="reviewer-name">ChatGPT</span>
+              reviewed <br /> <span className="reviewer-name">ChatGPT</span>
             </div>
             <hr />
             <div className="review-body">{review.content}</div>

@@ -8,6 +8,7 @@ import DataAnalysis from "./DataAnalysis";
 import WriteReview from "../../components/ProductList/WriteReview";
 import { useReview } from "./BlockChainReview";
 import StarRating from "./StarRating";
+import Reviews from "../../components/HomePage/Reviews";
 
 // Define the URL for the Infura provider
 const INFURA_URL =
@@ -109,7 +110,6 @@ function ProductDetail() {
       </div>
 
       <div className="writeReview-container">
-
         <WriteReview />
       </div>
 
@@ -125,27 +125,11 @@ function ProductDetail() {
         {DataAnalysis ? <DataAnalysis /> : "No Data Analysis Yet"}{" "}
       </div>
 
-      <div className="reviews-container">
-        <h2 className="review-title">Attribute Reviews</h2>
-        {reviews.length ? (
-          /* For each element (review), it also provides the position 
-        of that element within the array (index). */
-          reviews.map((review, index) => (
-            /* React requires a key prop on elements in a list to create 
-          a stable identity for each element */
-            <div key={index} className="review">
-              <div>
-                <StarRating averageRating={review.rating} />
-              </div>
-              <p>{review.content}</p>
-            </div>
-          ))
-        ) : (
-          <p>No reviews yet.</p>
-        )}
-      </div>
+      <div className="reviews-containerDetail">
+        <Reviews /></div>
     </div>
   );
 }
 
 export default ProductDetail;
+

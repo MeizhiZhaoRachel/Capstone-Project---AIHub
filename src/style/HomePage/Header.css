@@ -8,6 +8,16 @@
   padding: 0; 
   margin: auto; 
   max-width: 100%;
+  width: 100%; /* Ensure the header stretches across the full width */
+  position: fixed; /* Fix the header at the top of the viewport */
+  top: 0; /* Align the top edge of the header with the top edge of the viewport */
+  left: 0; /* Align the left edge of the header with the left edge of the viewport */
+  z-index: 1000; /* Ensure the header is above other content */
+  box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+}
+
+body {
+  padding-top: 90px; /* This should be equal to the height of the header */
 }
 
 .header-content{

@@ -6,9 +6,8 @@ import "../../style/ProductDetail/ProductDetail.css";
 import { useParams } from "react-router-dom";
 import DataAnalysis from "./DataAnalysis";
 import WriteReview from "../../components/ProductList/WriteReview";
-import { useReview } from "./BlockChainReview";
 import StarRating from "./StarRating";
-import Reviews from "../../components/HomePage/Reviews";
+import "../../style/HomePage/Reviews.css";
 
 // Define the URL for the Infura provider
 const INFURA_URL =
@@ -60,7 +59,7 @@ function ProductDetail() {
           );
           const average = total / parsedReviewsData.length;
           // Keeping one decimal for average rating
-          setAverageRating(average.toFixed(1));
+          setAverageRating(parseFloat(average.toFixed(1)));
           setReviews(parsedReviewsData);
         } else {
           setAverageRating("No ratings yet");
@@ -115,7 +114,7 @@ function ProductDetail() {
 
       <div className="productionInformation-container">
         <div className="productName">What is {productDetails.name}</div>
-        <p class="productDescription">
+        <p className="productDescription">
           <br /> {productDetails.description}
         </p>
       </div>
@@ -125,8 +124,36 @@ function ProductDetail() {
         {DataAnalysis ? <DataAnalysis /> : "No Data Analysis Yet"}{" "}
       </div>
 
-      <div className="reviews-containerDetail">
-        <Reviews /></div>
+      <div className="productDetailReviews-container">
+        <h2 className="reviews-title">Reviewer Sentiment</h2>
+        {reviews.length ? (
+          /* For each element (review), it also provides the position 
+          of that element within the array (index). */
+          reviews.map((review, index) => (
+            /* React requires a key prop on elements in a list to create 
+            a stable identity for each element */
+            //<div key={index} className="review">
+            <div className={`review review${index + 1}`} key={index}>
+              <div className="review-rating">
+                {/* Display a star for each rating point */}
+                {/* it expands the elements of the array into individual elements */}
+                {/* _ represents the current element of the array during each iteration */}
+                {[...Array(review.rating)].map((_, i) => (
+                  <span key={i}>★</span>
+                ))}
+              </div>
+              <div className="review-info">
+                <span className="reviewer-name">{review.userIdOrEmail} </span>
+                reviewed <br /> <span className="reviewer-name">{productDetails.name}</span>
+              </div>
+              <hr />
+              <div className="review-body">{review.content}</div>
+            </div>
+          ))
+        ) : (
+          <p>No 5-star reviews available.</p>
+        )}
+      </div>
     </div>
   );
 }

@@ -54,11 +54,9 @@ function Reviews() {
 
   return (
     <div className="reviews-container">
-      <div className="reviews-headline">Reviews</div>
+      <div className="reviews-headline">Browse Reviews</div>
       {reviews.length > 0 ? (
         reviews.map((review, index) => (
-          // <div className={`review review${index + 1}`} key={index}>
-          // <div className="review" style={{ gridArea: `review${index + 1}` }} key={index}>
           <div className={`review review${index + 1}`} key={index}>
             <div className="review-rating">
               {/* Display a star for each rating point */}

@@ -13,6 +13,8 @@ import {
 } from "chart.js";
 import { Bar, Pie } from "react-chartjs-2";
 import "../../style/ProductDetail/DataAnalysis.css";
+import ChartDataLabels from "chartjs-plugin-datalabels";
+import { color } from "chart.js/helpers";
 
 // Register necessary Chart.js components
 Chart.register(
@@ -21,7 +23,8 @@ Chart.register(
   BarElement,
   ArcElement,
   Tooltip,
-  Legend
+  Legend,
+  ChartDataLabels // Register the plugin here
 );
 
 const INFURA_URL =
@@ -103,7 +106,7 @@ function DataAnalysis() {
       {
         label: "Rating Distribution",
         data: ratingCounts.reverse(),
-        backgroundColor: "rgba(255, 213, 150, 0.6)", // Uniform color for all bars
+        backgroundColor: "rgba(255, 187, 112)", // Uniform color for all bars
         // [
         //   "rgba(255, 99, 132, 0.6)",
         //   "rgba(54, 162, 235, 0.6)",
@@ -131,6 +134,9 @@ function DataAnalysis() {
         grid: {
           display: false, // This will remove the grid lines
         },
+        border: {
+          display: false, // This will remove the border
+        },
         ticks: {
           display: false, // This will remove the x-axis labels
         },
@@ -140,6 +146,9 @@ function DataAnalysis() {
         grid: {
           display: false, // This will remove the grid lines
         },
+        border: {
+          display: false, // This will remove the border
+        },
       },
     },
     responsive: true,
@@ -148,18 +157,30 @@ function DataAnalysis() {
       legend: {
         display: false, // Set to false to hide the legend
       },
+      tooltip: {
+        enabled: true, // This will enable tooltips
+      },
       datalabels: {
         display: true,
         color: "#000000",
         anchor: "end",
-        align: "top",
+        align: "end",
+        offset: 4, // Adjusts the distance between the label and the bar end
+        padding: {
+          // Add padding around the labels
+          top: 10,
+          right: 10,
+        },
+        font: {
+          size: 12, // Adjust font size if necessary
+        },
         formatter: (value, context) => {
           let sum = 0;
           let dataArr = context.chart.data.datasets[0].data;
           dataArr.map((data) => {
             sum += data;
           });
-          let percentage = ((value * 100) / sum).toFixed(1) + "%";
+          let percentage = ((value * 100) / sum).toFixed(0) + "%";
           return percentage;
         },
       },
@@ -174,7 +195,7 @@ function DataAnalysis() {
           <Bar
             data={data}
             options={optionsBar}
-            style={{ maxWidth: "300px", maxHeight: "200px" }}
+            style={{ maxWidth: "600px", maxHeight: "200px" }}
           />
         </div>
         <div className="bar-section">

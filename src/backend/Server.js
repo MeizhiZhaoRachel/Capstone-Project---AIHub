@@ -48,10 +48,6 @@ async function createSignUp() {
 
 createSignUp();
 
-// app.use(cors({
-//   origin: 'http://localhost:3001', // Directly setting the CORS origin
-//   credentials: true,
-// }));
 var corsOptions = {
   origin: ["http://localhost:3000", "http://localhost:3001"], // This should match the origin of your frontend application
   credentials: true, // If your frontend needs to send cookies or authorization headers
@@ -121,22 +117,6 @@ if (isNaN(parsedRating)) {
     res.status(500).json({ error: "Error preparing transaction" });
   }
 });
-//   // Fetch the first account from your local blockchain node
-//   const accounts = await web3.eth.getAccounts();
-//   // Assume you have a function that prepares and sends the transaction
-//   const receipt = await reviewContract.methods
-//     .writeReview(productId, content, rating, userIdOrEmail)
-//     .send({ from: accounts[0] }); // Using the first account to send the transaction
-
-//   res.json({
-//     message: "Review submitted successfully",
-//     transactionId: receipt.transactionHash,
-//     details: receipt,
-//   });
-// } catch (error) {
-//   console.error("Failed to submit review:", error);
-//   res.status(500).json({ error: "Failed to submit review" });
-// }
 
 // Set up review contract route
 app.get("/api/reviews", async (req, res) => {

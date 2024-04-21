@@ -25,10 +25,5 @@ async function postReviews() {
   console.error("Failed to post review:", error);
 }
 }
-// Function to get the total number of reviews.
-// async function getTotalReviews() {
-// 	  const totalReviews = await reviewContract.methods.getReviewsByProductId('2').call();
-// 	  console.log(totalReviews);
-// }
 
 postReviews();

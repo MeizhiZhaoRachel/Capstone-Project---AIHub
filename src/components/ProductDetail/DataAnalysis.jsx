@@ -73,7 +73,7 @@ function DataAnalysis() {
           (review) => review.rating === rating && review.productId === productId
         ).length
     );
-    setRatingCounts(counts.reverse());
+    setRatingCounts(counts);
   };
 
   const analyzeVocations = (reviewsData) => {

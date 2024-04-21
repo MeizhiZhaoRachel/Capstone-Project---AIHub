@@ -17,35 +17,42 @@ function SearchBox() {
 
   return (
     <div className="container">
-      <div className="prompt">
-        <p>Find a product</p>
-      </div>
-      <div className="search-container">
-        <input
-          type="text"
-          className="search-box"
-          placeholder="Search..."
-          value={searchTerm}
-          onChange={(e) => setSearchTerm(e.target.value)}
-        />
-        {/*The button with the onClick handler to trigger the search*/}
-        <button className="search-button" onClick={handleSearch}>
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="16"
-            height="16"
-            fill="currentColor"
-            className="bi bi-search"
-            viewBox="0 0 16 16"
-          >
-            <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0" />
-          </svg>
-        </button>
-      </div>
-      <Link to="/productlist" className="view-all-button">
-        View All Products
-      </Link>
+    <div className="prompt">
+      <p>Find a product</p>
     </div>
+    {/* Add a form element with an onSubmit event handler */}
+    <form 
+      className="search-container" 
+      onSubmit={handleSearch}
+    >
+      <input
+        type="text"
+        className="search-box"
+        placeholder="Search..."
+        value={searchTerm}
+        onChange={(e) => setSearchTerm(e.target.value)}
+      />
+      {/* Change the button type to "submit" */}
+      <button 
+        type="submit" 
+        className="search-button"
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="16"
+          height="16"
+          fill="currentColor"
+          className="bi bi-search"
+          viewBox="0 0 16 16"
+        >
+          <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0" />
+        </svg>
+      </button>
+    </form>
+    <Link to="/productlist" className="view-all-button">
+      View All Products
+    </Link>
+  </div>
   );
 }
 

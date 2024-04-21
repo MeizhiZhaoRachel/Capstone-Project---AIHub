@@ -9,7 +9,7 @@ const account = web3.eth.accounts.privateKeyToAccount("0xe18ed698b73ae21cffe602b
 web3.eth.accounts.wallet.add(account);
 web3.eth.defaultAccount = account.address;
 // Smart contract address on the blockchain.
-const contractAddress = "0x296ffee7e9be5f2b57cc1ce417f1ac6030fbb45b";
+const contractAddress = "0x4e9abec89a8b6a2453511d97e3d7a85d2a5193a7";
 
 
 // Creates an instance of the smart contract.

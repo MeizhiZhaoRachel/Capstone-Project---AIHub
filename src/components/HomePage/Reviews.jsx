@@ -2,12 +2,13 @@ import React, { useState, useEffect } from "react";
 import Web3 from "web3";
 import "../../style/HomePage/Reviews.css";
 import reviewContractABI from "../ProductList/reviewContractABI.json";
+import { useProducts } from "../ProductDetail/ProductsContext";
 
 // Define constants for connecting to the blockchain
 const INFURA_URL =
   "https://sepolia.infura.io/v3/dee208015aa64ad7ac33bdc6c192bc4f";
 const web3 = new Web3(INFURA_URL);
-const contractAddress = "0x296ffee7e9be5f2b57cc1ce417f1ac6030fbb45b";
+const contractAddress = "0x4e9abec89a8b6a2453511d97e3d7a85d2a5193a7";
 const reviewContract = new web3.eth.Contract(
   reviewContractABI,
   contractAddress
@@ -15,6 +16,13 @@ const reviewContract = new web3.eth.Contract(
 
 function Reviews() {
   const [reviews, setReviews] = useState([]);
+  const {products} = useProducts();
+
+  const getProductNameById = (id) => {
+    const product = products.find((product) => product.id == id);
+    return product ? product.name : "Unknown Product";
+  
+  }
 
   useEffect(() => {
     const fetchReviews = async () => {
@@ -23,7 +31,7 @@ function Reviews() {
         let allReviews = [];
         for (const id of productIds) {
           const reviewData = await reviewContract.methods
-            .getReviewsByProductId("1")
+            .getReviewsByProductId(id)
             .call();
           // Filter for only 5-star reviews and limit to 9 entries
           const parsedReviewsData = reviewData.map((review) => ({
@@ -62,7 +70,7 @@ function Reviews() {
             </div>
             <div className="review-info">
               <span className="reviewer-name">{review.userIdOrEmail} </span>
-              reviewed <br /> <span className="reviewer-name">ChatGPT</span>
+              reviewed <br /> <span className="reviewer-name">{getProductNameById(review.productId)}</span>
             </div>
             <hr />
             <div className="review-body">{review.content}</div>

@@ -14,7 +14,7 @@ import Reviews from "../../components/HomePage/Reviews";
 const INFURA_URL =
   "https://sepolia.infura.io/v3/dee208015aa64ad7ac33bdc6c192bc4f";
 // Smart contract address on the blockchain.
-const contractAddress = "0x296ffee7e9be5f2b57cc1ce417f1ac6030fbb45b";
+const contractAddress = "0x4e9abec89a8b6a2453511d97e3d7a85d2a5193a7";
 const web3 = new Web3(INFURA_URL);
 // Creates an instance of the smart contract.
 const reviewContract = new web3.eth.Contract(
